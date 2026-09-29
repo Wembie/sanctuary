@@ -1,0 +1,136 @@
+/*
+ * Sanctuary design tokens.
+ * Scene colors are registered with @property so a change of environment
+ * becomes a slow, continuous dusk instead of a cut.
+ */
+
+@property --bg-top {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #04060d;
+}
+@property --bg-bottom {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0a0f22;
+}
+@property --horizon {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1a1d44;
+}
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #b4c0ff;
+}
+@property --glow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #8390ff;
+}
+@property --aurora-a {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2fb9b3;
+}
+@property --aurora-b {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #6d52e6;
+}
+@property --aurora-strength {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.55;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Type */
+  --font-sans:
+    'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --weight-thin: 200;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --text-display: clamp(2.1rem, 1.4rem + 3.4vw, 4.25rem);
+  --text-title: clamp(1.5rem, 1.15rem + 1.6vw, 2.4rem);
+  --text-lead: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-micro: 0.75rem;
+  --tracking-wide: 0.16em;
+
+  /* Text: light on dark, never pure white */
+  --text-primary: rgb(238 240 250 / 0.94);
+  --text-secondary: rgb(226 230 245 / 0.7);
+  --text-faint: rgb(226 230 245 / 0.5);
+
+  /* Surfaces */
+  --bg-primary: var(--bg-top);
+  --bg-secondary: var(--bg-bottom);
+  --surface: rgb(255 255 255 / 0.045);
+  --surface-hover: rgb(255 255 255 / 0.075);
+  --surface-strong: rgb(255 255 255 / 0.1);
+  --surface-glass: rgb(14 16 28 / 0.42);
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.18);
+  --shadow-soft: 0 24px 60px -24px rgb(0 0 0 / 0.55);
+  --blur: 20px;
+
+  /* Shape */
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+  --radius-pill: 999px;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Motion: nothing here is urgent */
+  --ease-calm: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-soft-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 260ms;
+  --dur-base: 700ms;
+  --dur-slow: 1400ms;
+  --dur-scene: 3200ms;
+
+  --nav-height: 3.5rem;
+
+  transition:
+    --bg-top var(--dur-scene) var(--ease-calm),
+    --bg-bottom var(--dur-scene) var(--ease-calm),
+    --horizon var(--dur-scene) var(--ease-calm),
+    --accent var(--dur-scene) var(--ease-calm),
+    --glow var(--dur-scene) var(--ease-calm),
+    --aurora-a var(--dur-scene) var(--ease-calm),
+    --aurora-b var(--dur-scene) var(--ease-calm),
+    --aurora-strength var(--dur-scene) var(--ease-calm);
+}
+
+/* Reduced motion keeps fades (they aid orientation) but makes them brief. */
+:root[data-motion='reduced'] {
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+  --dur-scene: 400ms;
+}
+
+:root[data-performance='low'] {
+  --blur: 8px;
+}

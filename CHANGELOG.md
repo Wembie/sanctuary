@@ -18,6 +18,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   Sleep keeps dimming wherever you are. Starting a new session replaces the previous one.
 - **Music timer**: "Stop music after 15 / 30 / 60 min" in the Music section, with a quiet
   countdown; the music then fades out over 20 seconds. Stopping the music cancels it.
+- **Works offline and installs like an app** (PWA): a build-generated service worker precaches
+  the app; new versions take over once the old one is closed. PNG and maskable icons, an
+  Apple touch icon, and a richer web manifest. Music files stay online-only.
 
 ### Changed
 

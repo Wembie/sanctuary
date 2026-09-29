@@ -175,6 +175,10 @@ version section at release). New ideas go into `TODO.md`, not the changelog.
 - On this Windows machine: bash heredocs containing backticks break the Bash tool; write
   scripts to a file instead. Python in text mode writes CRLF; `.gitattributes` normalizes to LF,
   but prefer `newline='\n'` when writing files.
+- **Service worker** (`src/pwa/serviceWorker.ts` + plugin in `vite.config.ts`): generated at
+  build time, registered in production only. It deliberately never calls `skipWaiting` (a running
+  page must keep its own chunks) and never caches audio (Range requests). To test offline, use
+  `npm run preview`, not the dev server.
 - `import.meta.glob` for music is evaluated at build time: new files need a rebuild.
 - `OfflineAudioContext` renders faster than the composer's timers; when measuring generative
   music offline, step the render with `ctx.suspend(t)` and resume after ~450 ms.

@@ -1,0 +1,74 @@
+.master {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+  animation-delay: 120ms;
+}
+
+.masterSlider {
+  flex: 1 1 12rem;
+  max-width: 20rem;
+}
+
+.saved {
+  margin-top: var(--space-4);
+  font-size: var(--text-micro);
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.notice {
+  color: var(--text-secondary);
+}
+
+.music {
+  margin-top: var(--space-8);
+  animation-delay: 240ms;
+}
+
+.sectionTitle {
+  margin-bottom: var(--space-5);
+  font-size: var(--text-lead);
+  font-weight: var(--weight-light);
+  letter-spacing: 0.02em;
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-7) var(--space-4);
+  border-radius: var(--radius-l);
+  border: 1px dashed var(--border);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.emptyOrb {
+  width: 18px;
+  height: 18px;
+  margin-bottom: var(--space-3);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--accent-rgb) / 0.6), transparent 70%);
+  animation: float 7s var(--ease-calm) infinite alternate;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(2px);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.tracks {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}

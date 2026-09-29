@@ -1,0 +1,147 @@
+.picker {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+}
+
+.customField {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+}
+
+.customField input {
+  width: 5ch;
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-s);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.customField input::-webkit-inner-spin-button,
+.customField input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* ---------- Ring ---------- */
+
+.ring {
+  position: relative;
+  max-width: 76vmin;
+  max-height: 76vmin;
+  aspect-ratio: 1;
+  animation: ring-breathe 12s var(--ease-calm) infinite;
+}
+
+.ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.ringTrack {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.07);
+}
+
+.ringValue {
+  fill: none;
+  stroke: rgb(var(--accent-rgb) / 0.65);
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgb(var(--glow-rgb) / 0.7));
+  transition: stroke-dashoffset 1s linear;
+}
+
+.ringContent {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-1);
+}
+
+/* The ring breathes too, so slowly you'd only notice if you watched. */
+@keyframes ring-breathe {
+  0%,
+  100% {
+    transform: scale(0.985);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+
+:root[data-motion='reduced'] .ring {
+  animation: none;
+}
+
+.clock {
+  font-size: clamp(2.4rem, 1.6rem + 3vw, 3.6rem);
+  font-weight: var(--weight-thin);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.clockLabel {
+  font-size: var(--text-micro);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---------- Controls ---------- */
+
+.controls {
+  position: fixed;
+  z-index: 15;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + var(--space-6));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.control,
+.endButton {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  transition:
+    color var(--dur-base) var(--ease-calm),
+    background var(--dur-base) var(--ease-calm),
+    transform var(--dur-fast) var(--ease-calm);
+}
+
+.endButton {
+  padding: 0 var(--space-5);
+  font-size: var(--text-small);
+  letter-spacing: 0.04em;
+}
+
+.control:hover,
+.endButton:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.control:active,
+.endButton:active {
+  transform: scale(0.96);
+}

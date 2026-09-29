@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-env="night">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sanctuary: A quiet place for a noisy world</title>
+    <meta
+      name="description"
+      content="An immersive digital space for breathing, relaxing, focusing and slowing down."
+    />
+    <meta name="theme-color" content="#04060d" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://wembie.github.io/sanctuary/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sanctuary" />
+    <meta property="og:title" content="Sanctuary: A quiet place for a noisy world" />
+    <meta
+      property="og:description"
+      content="An immersive digital space for breathing, relaxing, focusing and slowing down."
+    />
+    <meta property="og:url" content="https://wembie.github.io/sanctuary/" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./favicon.svg" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <style>
+      /* First paint: the night sky, before any script or stylesheet arrives. */
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #04060d;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p
+        style="
+          color: #e6e8f5;
+          font-family: system-ui, sans-serif;
+          text-align: center;
+          padding: 30vh 1rem;
+        "
+      >
+        Sanctuary needs JavaScript to create its space. Take a breath anyway.
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

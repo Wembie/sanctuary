@@ -1,0 +1,79 @@
+import { useEffect } from 'react';
+import { useIdle } from '../hooks/useIdle';
+import { useLowPerformance, useReducedMotion } from '../hooks/usePreferences';
+import { useStore } from '../hooks/useStore';
+import { toggleFullscreen } from '../lib/device';
+import { audio } from '../services/audio/AudioManager';
+import { experienceStore } from '../store/experience';
+import { mixStore, toSoundMix } from '../store/mix';
+import { sceneStore } from '../store/scene';
+import { settingsStore } from '../store/settings';
+import { applyTheme, getEnvironment } from '../themes/environments';
+import { setSoundEnabled } from './actions';
+import { ROUTES, type RoutePath } from './routes';
+
+/** Mirrors preferences onto <html> so CSS can respond without prop drilling. */
+export function useDocumentState(route: RoutePath, entered: boolean): void {
+  const reduced = useReducedMotion();
+  const low = useLowPerformance();
+  const autoHide = useStore(settingsStore, (s) => s.autoHide);
+  const stillness = useStore(sceneStore, (s) => s.stillness);
+  const settingsOpen = useStore(sceneStore, (s) => s.settingsOpen);
+  const idleAfter = stillness ? 2500 : route === '/' ? 20_000 : 6000;
+  const idle = useIdle(idleAfter, entered && !settingsOpen && (autoHide || stillness));
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.motion = reduced ? 'reduced' : 'full';
+    root.dataset.performance = low ? 'low' : 'high';
+  }, [reduced, low]);
+
+  useEffect(() => {
+    document.documentElement.dataset.idle = String(idle);
+  }, [idle]);
+
+  useEffect(() => {
+    document.title = ROUTES[route].title;
+    if (entered && route !== '/') experienceStore.set({ lastRoute: route });
+  }, [route, entered]);
+}
+
+/** The scene's colors follow the chosen environment. */
+export function useEnvironmentTheme(): void {
+  const environment = useStore(experienceStore, (s) => s.environment);
+  useEffect(() => {
+    applyTheme(getEnvironment(environment));
+  }, [environment]);
+}
+
+/** Keeps the audio engine in step with the stored mix and settings. */
+export function useAudioSync(): void {
+  const mix = useStore(mixStore);
+  const { soundEnabled, masterVolume } = useStore(settingsStore);
+  useEffect(() => {
+    audio.setMaster(masterVolume, soundEnabled);
+  }, [masterVolume, soundEnabled]);
+  useEffect(() => {
+    // Silent voices still cost CPU; stop them entirely when sound is off.
+    audio.sync(soundEnabled ? toSoundMix(mix) : {});
+  }, [mix, soundEnabled]);
+}
+
+const isTyping = (target: EventTarget | null) =>
+  target instanceof HTMLElement &&
+  (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+
+/** F: fullscreen. M: sound. Escape: leave stillness. */
+export function useKeyboardShortcuts(entered: boolean): void {
+  useEffect(() => {
+    if (!entered) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
+      const key = e.key.toLowerCase();
+      if (key === 'f') void toggleFullscreen();
+      else if (key === 'm' && audio.supported) setSoundEnabled(!settingsStore.get().soundEnabled);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [entered]);
+}

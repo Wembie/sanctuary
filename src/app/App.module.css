@@ -1,0 +1,72 @@
+/*
+ * Main and view are fixed, full-viewport boxes: they get filter during
+ * transitions, and a filtered ancestor becomes the containing block for
+ * the fixed pages inside it. Same size as the viewport = no layout jump.
+ */
+.main {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  outline: none;
+  transition:
+    opacity var(--dur-slow) var(--ease-calm),
+    filter var(--dur-slow) var(--ease-calm);
+}
+
+.main[data-hidden] {
+  opacity: 0;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* Page arrival: fade and unblur. Page departure: see [data-leaving] below. */
+.view {
+  position: fixed;
+  inset: 0;
+  animation: view-in 1.1s var(--ease-soft-out) backwards;
+  transition:
+    opacity 450ms var(--ease-calm),
+    filter 450ms var(--ease-calm);
+}
+
+:root[data-leaving] .view {
+  opacity: 0;
+  filter: blur(8px);
+}
+
+@keyframes view-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+:root[data-motion='reduced'] .view {
+  animation-name: view-in-reduced;
+  animation-duration: 300ms;
+}
+
+@keyframes view-in-reduced {
+  from {
+    opacity: 0;
+  }
+}
+
+.fallback {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: var(--gutter);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.fallbackLink {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}

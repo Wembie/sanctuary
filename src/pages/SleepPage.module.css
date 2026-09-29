@@ -1,0 +1,43 @@
+.moon {
+  width: clamp(72px, 16vmin, 120px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 36%, #f6f1e4 0%, #d9d3c4 55%, #b7b1a4 100%);
+  box-shadow:
+    0 0 60px 8px rgb(246 241 228 / 0.18),
+    0 0 180px 40px rgb(246 241 228 / 0.07);
+  opacity: 0.85;
+  /* A crescent: the dark side is a shadow cast by the sky itself. */
+  mask-image: radial-gradient(circle at 72% 38%, transparent 42%, black 44%);
+  -webkit-mask-image: radial-gradient(circle at 72% 38%, transparent 42%, black 44%);
+  animation: moon-rise 8s var(--ease-soft-out) backwards;
+}
+
+@keyframes moon-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.whisper {
+  margin-top: var(--space-6);
+  min-height: 2em;
+  animation: whisper 14s var(--ease-calm) 2s forwards;
+  opacity: 1;
+}
+
+/* The words leave on their own. */
+@keyframes whisper {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.goodnight {
+  animation: whisper 12s var(--ease-calm) 3s forwards;
+}

@@ -1,0 +1,103 @@
+.nav {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + var(--space-4));
+  transform: translateX(-50%);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  animation: nav-in var(--dur-slow) var(--ease-soft-out) 0.4s backwards;
+}
+
+.nav[data-hidden] {
+  opacity: 0;
+  transform: translate(-50%, 16px);
+  pointer-events: none;
+}
+
+@keyframes nav-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 42px;
+  min-width: 42px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  color: var(--text-faint);
+  font-size: var(--text-small);
+  transition:
+    color var(--dur-base) var(--ease-calm),
+    background var(--dur-base) var(--ease-calm),
+    transform var(--dur-fast) var(--ease-calm);
+}
+
+.item:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.item:active {
+  transform: scale(0.96);
+}
+
+.item[aria-current='page'] {
+  color: var(--text-primary);
+  background: var(--surface-strong);
+}
+
+.item[aria-current='page'] svg {
+  filter: drop-shadow(0 0 6px rgb(var(--glow-rgb) / 0.8));
+}
+
+/* Labels only when there's room and the item is current or hovered. */
+.label {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .item {
+    padding: 0 var(--space-4);
+  }
+  .label {
+    display: inline;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 var(--space-1);
+  background: var(--border-strong);
+}
+
+@media (max-width: 360px) {
+  .item {
+    min-width: 38px;
+    padding: 0 var(--space-2);
+  }
+  .divider {
+    margin: 0;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 480px) {
+  .nav {
+    bottom: calc(var(--safe-bottom) + var(--space-2));
+  }
+}

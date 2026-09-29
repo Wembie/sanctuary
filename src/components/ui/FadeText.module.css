@@ -1,0 +1,36 @@
+.text {
+  animation: text-in var(--dur-slow) var(--ease-soft-out) backwards;
+  transition:
+    opacity var(--exit) var(--ease-calm),
+    filter var(--exit) var(--ease-calm),
+    transform var(--exit) var(--ease-calm);
+}
+
+.text[data-leaving] {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(-4px);
+}
+
+@keyframes text-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(6px);
+  }
+}
+
+:root[data-motion='reduced'] .text {
+  animation-name: text-in-reduced;
+}
+
+:root[data-motion='reduced'] .text[data-leaving] {
+  filter: none;
+  transform: none;
+}
+
+@keyframes text-in-reduced {
+  from {
+    opacity: 0;
+  }
+}

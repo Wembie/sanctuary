@@ -10,20 +10,18 @@ export const ROUTE_PATHS = [
 
 export type RoutePath = (typeof ROUTE_PATHS)[number];
 
-export interface RouteMeta {
-  path: RoutePath;
-  label: string;
-  title: string;
-}
+export type RouteName =
+  'home' | 'breathe' | 'sounds' | 'focus' | 'sleep' | 'explore' | 'disconnect';
 
-export const ROUTES: Record<RoutePath, RouteMeta> = {
-  '/': { path: '/', label: 'Home', title: 'Sanctuary: A quiet place for a noisy world' },
-  '/breathe': { path: '/breathe', label: 'Breathe', title: 'Breathe · Sanctuary' },
-  '/sounds': { path: '/sounds', label: 'Sounds', title: 'Sounds · Sanctuary' },
-  '/focus': { path: '/focus', label: 'Focus', title: 'Focus · Sanctuary' },
-  '/sleep': { path: '/sleep', label: 'Sleep', title: 'Sleep · Sanctuary' },
-  '/explore': { path: '/explore', label: 'Explore', title: 'Explore · Sanctuary' },
-  '/disconnect': { path: '/disconnect', label: 'Disconnect', title: 'Disconnect · Sanctuary' },
+/** Key into the `routes` section of the dictionaries. */
+export const ROUTE_NAME: Record<RoutePath, RouteName> = {
+  '/': 'home',
+  '/breathe': 'breathe',
+  '/sounds': 'sounds',
+  '/focus': 'focus',
+  '/sleep': 'sleep',
+  '/explore': 'explore',
+  '/disconnect': 'disconnect',
 };
 
 /** "#/breathe?x" → "/breathe". Anything unknown lands softly at home. */

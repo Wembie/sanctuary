@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { useT } from '../../i18n';
 import styles from './controls.module.css';
 
 interface SliderProps {
@@ -26,6 +27,7 @@ export function Slider({
   showLabel = false,
   disabled,
 }: SliderProps) {
+  const t = useT();
   const fill = ((value - min) / (max - min)) * 100;
   return (
     <label className={styles.slider} data-disabled={disabled || undefined}>
@@ -37,7 +39,7 @@ export function Slider({
         step={step}
         value={value}
         disabled={disabled}
-        aria-valuetext={valueText ?? `${Math.round(fill)} percent`}
+        aria-valuetext={valueText ?? t.common.percent(Math.round(fill))}
         onChange={(e) => onChange(Number(e.currentTarget.value))}
         style={{ '--fill': `${fill}%` } as CSSProperties}
       />

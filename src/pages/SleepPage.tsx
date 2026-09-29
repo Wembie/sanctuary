@@ -4,6 +4,7 @@ import { SessionControls } from '../components/session/SessionControls';
 import { FadeText } from '../components/ui/FadeText';
 import { useImmersive, useSceneIntensityReset } from '../hooks/useScene';
 import { useSession } from '../hooks/useSession';
+import { useT } from '../i18n';
 import { minutes } from '../lib/timer';
 import { sleepFade } from '../lib/sleep';
 import { audio } from '../services/audio/AudioManager';
@@ -14,6 +15,7 @@ import local from './SleepPage.module.css';
 const PRESETS: readonly DurationChoice[] = [15, 30, 60, 90, null];
 
 export default function SleepPage() {
+  const t = useT();
   const [choice, setChoice] = useState<DurationChoice>(30);
   const session = useSession();
   const active = session.status === 'running' || session.status === 'paused';
@@ -47,11 +49,11 @@ export default function SleepPage() {
     return (
       <div className={`${styles.page} ${styles.center}`}>
         <div className={local.goodnight}>
-          <FadeText as="h1" text="Sleep well." className={styles.title} />
+          <FadeText as="h1" text={t.sleep.goodnight} className={styles.title} />
         </div>
         <div className={`${styles.bottomBar} chrome`}>
           <button type="button" className={styles.ghost} onClick={wake}>
-            I’m awake
+            {t.sleep.awake}
           </button>
         </div>
       </div>
@@ -61,12 +63,12 @@ export default function SleepPage() {
   if (active) {
     return (
       <div className={`${styles.page} ${styles.center}`}>
-        <h1 className="sr-only">Sleep session</h1>
+        <h1 className="sr-only">{t.sleep.sessionHeading}</h1>
         <div className={local.moon} aria-hidden="true" />
         <div className={local.whisper}>
-          <FadeText text="Let go of the day." className={styles.lead} />
+          <FadeText text={t.sleep.whisper} className={styles.lead} />
         </div>
-        <SessionControls session={session} endLabel="Wake" pausable={false} onEnd={wake} />
+        <SessionControls session={session} endLabel={t.sleep.wake} pausable={false} onEnd={wake} />
       </div>
     );
   }
@@ -75,12 +77,12 @@ export default function SleepPage() {
     <div className={`${styles.page} ${styles.center}`}>
       <div className={`${styles.stack} ${styles.narrow}`}>
         <header className={`${styles.stack} arrive`}>
-          <h1 className={styles.display}>Sleep.</h1>
-          <p className={styles.lead}>The screen will dim slowly, then the sound will follow.</p>
+          <h1 className={styles.display}>{t.sleep.title}</h1>
+          <p className={styles.lead}>{t.sleep.lead}</p>
         </header>
         <div className="arrive" style={{ animationDelay: '150ms' }}>
           <DurationPicker
-            label="Fade out after"
+            label={t.sleep.fadeLabel}
             presets={PRESETS}
             value={choice}
             onChange={setChoice}
@@ -92,10 +94,10 @@ export default function SleepPage() {
           style={{ animationDelay: '300ms' }}
           onClick={() => session.start(choice === null ? null : minutes(choice))}
         >
-          Begin
+          {t.common.begin}
         </button>
         <p className={`${styles.muted} arrive`} style={{ animationDelay: '450ms' }}>
-          Put the phone face down. Nothing will wake you.
+          {t.sleep.hint}
         </p>
       </div>
     </div>

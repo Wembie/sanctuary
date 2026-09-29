@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  getBreathState,
-  PHASE_LABEL,
-  type BreathPattern,
-  type BreathPhase,
-} from '../../lib/breathing';
+import { getBreathState, type BreathPattern, type BreathPhase } from '../../lib/breathing';
+import { useT } from '../../i18n';
 import { useAnimationFrame } from '../../hooks/useAnimationFrame';
 import { formatClock, Stopwatch } from '../../lib/timer';
 import { sceneSignals } from '../../store/scene';
@@ -29,6 +25,7 @@ export function BreathingOrb({
   showTimer,
   reduced,
 }: BreathingOrbProps) {
+  const t = useT();
   const orbRef = useRef<HTMLButtonElement>(null);
   const watch = useRef(new Stopwatch());
   const [phase, setPhase] = useState<BreathPhase>('inhale');
@@ -72,7 +69,7 @@ export function BreathingOrb({
         data-phase={phase}
         data-running={running || undefined}
         onClick={onToggle}
-        aria-label={running ? 'Pause breathing' : 'Resume breathing'}
+        aria-label={running ? t.breathe.pauseAria : t.breathe.resumeAria}
       >
         <span className={styles.halo} aria-hidden="true" />
         <span className={styles.core} aria-hidden="true" />
@@ -80,7 +77,7 @@ export function BreathingOrb({
 
       <div className={styles.caption} aria-live="polite" aria-atomic="true">
         <span key={running ? phase : 'paused'} className={styles.phase}>
-          {running ? PHASE_LABEL[phase] : 'Paused'}
+          {running ? t.breathe.phases[phase] : t.breathe.paused}
         </span>
         {reduced && running && (
           <span className={styles.count} aria-hidden="true">
@@ -90,7 +87,7 @@ export function BreathingOrb({
       </div>
 
       {showTimer && (
-        <p className={styles.timer} aria-label={`Breathing for ${clock}`}>
+        <p className={styles.timer} aria-label={t.breathe.timerAria(clock)}>
           {clock}
         </p>
       )}

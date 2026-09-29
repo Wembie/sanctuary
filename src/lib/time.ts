@@ -8,15 +8,6 @@ export function getDayPart(date: Date = new Date()): DayPart {
   return 'night';
 }
 
-const GREETINGS: Record<DayPart, string> = {
-  morning: 'Good morning.',
-  afternoon: 'Good afternoon.',
-  evening: 'Good evening.',
-  night: 'Good evening.',
-};
-
-export const getGreeting = (date: Date = new Date()): string => GREETINGS[getDayPart(date)];
-
 /** Local calendar date as YYYY-MM-DD (not UTC: "today" is the user's today). */
 export function localDateKey(date: Date = new Date()): string {
   const y = date.getFullYear();

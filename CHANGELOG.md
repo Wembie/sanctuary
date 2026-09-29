@@ -5,6 +5,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Added
+
+- **Internationalization**: English, Español, Português and Français. The language is detected
+  from the browser (`es-CO` → Español) and can be changed in Settings; the choice persists.
+  Dictionaries are typed against English, so a missing translation fails the build. `<html lang>`
+  and page titles follow the language.
+
+### Changed
+
+- Display text moved out of data modules (environments, sounds, techniques, routes) into the
+  dictionaries in `src/i18n/`; data now carries only ids.
+
 ### Planned for v0.2 — Immersion
 
 - Audio-reactive visualizer (blobs and waves, never an equalizer)

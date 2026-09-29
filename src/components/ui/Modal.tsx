@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { useT } from '../../i18n';
 import { Icon } from './Icon';
 import styles from './Modal.module.css';
 
@@ -16,6 +17,7 @@ const CLOSE_MS = 380;
  * Opens and closes with a soft scale and fade.
  */
 export function Modal({ open, onClose, title, children }: ModalProps) {
+  const t = useT();
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -57,7 +59,12 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
           <h2 id={titleId} className={styles.title}>
             {title}
           </h2>
-          <button type="button" className={styles.close} onClick={onClose} aria-label="Close">
+          <button
+            type="button"
+            className={styles.close}
+            onClick={onClose}
+            aria-label={t.common.close}
+          >
             <Icon name="close" size={18} />
           </button>
         </header>

@@ -14,37 +14,22 @@ export type TechniqueId = 'calm' | 'box' | 'deep' | 'custom';
 
 export interface Technique {
   id: TechniqueId;
-  label: string;
-  description: string;
   pattern: BreathPattern;
 }
 
 export const PHASE_ORDER: readonly BreathPhase[] = ['inhale', 'hold', 'exhale', 'rest'];
 
-export const PHASE_LABEL: Record<BreathPhase, string> = {
-  inhale: 'Inhale',
-  hold: 'Hold',
-  exhale: 'Exhale',
-  rest: 'Rest',
-};
-
 export const TECHNIQUES: Record<Exclude<TechniqueId, 'custom'>, Technique> = {
   calm: {
     id: 'calm',
-    label: 'Calm',
-    description: 'A longer exhale to slow everything down.',
     pattern: { inhale: 4, hold: 4, exhale: 6, rest: 2 },
   },
   box: {
     id: 'box',
-    label: 'Box',
-    description: 'Four even sides. Steady and grounding.',
     pattern: { inhale: 4, hold: 4, exhale: 4, rest: 4 },
   },
   deep: {
     id: 'deep',
-    label: 'Deep',
-    description: 'Four, seven, eight. For the end of a long day.',
     pattern: { inhale: 4, hold: 7, exhale: 8, rest: 0 },
   },
 };

@@ -1,3 +1,4 @@
+import { useT } from '../../i18n';
 import { Segmented } from '../ui/Segmented';
 import styles from './Session.module.css';
 
@@ -16,14 +17,15 @@ interface DurationPickerProps {
 const keyOf = (value: DurationChoice): string => (value === null ? 'infinite' : String(value));
 
 export function DurationPicker({ label, presets, value, onChange, custom }: DurationPickerProps) {
+  const t = useT();
   const isPreset = presets.includes(value);
   const options = [
     ...presets.map((minutes) => ({
       value: keyOf(minutes),
-      label: minutes === null ? '∞' : `${minutes} min`,
-      hint: minutes === null ? 'No end' : undefined,
+      label: minutes === null ? '∞' : t.common.minutesShort(minutes),
+      hint: minutes === null ? t.common.noEnd : undefined,
     })),
-    ...(custom ? [{ value: 'custom', label: 'Custom' }] : []),
+    ...(custom ? [{ value: 'custom', label: t.common.custom }] : []),
   ];
 
   const onSegment = (key: string) => {
@@ -52,7 +54,7 @@ export function DurationPicker({ label, presets, value, onChange, custom }: Dura
               if (Number.isFinite(next)) onChange(Math.min(custom.max, Math.max(custom.min, next)));
             }}
           />
-          <span>minutes</span>
+          <span>{t.common.minutes}</span>
         </label>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { setSoundEnabled } from '../../app/actions';
 import { useStore } from '../../hooks/useStore';
-import { SOUND_IDS, SOUNDS, type SoundId } from '../../services/audio/catalog';
+import { useT } from '../../i18n';
+import { SOUND_IDS, type SoundId } from '../../services/audio/catalog';
 import { mixStore, setChannelVolume, toggleChannel } from '../../store/mix';
 import { settingsStore } from '../../store/settings';
 import { Icon } from '../ui/Icon';
@@ -20,7 +21,8 @@ export function SoundMixer({ disabled }: { disabled: boolean }) {
 }
 
 function SoundTile({ id, on, volume }: { id: SoundId; on: boolean; volume: number }) {
-  const sound = SOUNDS[id];
+  const t = useT();
+  const sound = t.sounds.items[id];
   return (
     <li className={styles.tile} data-on={on || undefined}>
       <button
@@ -47,7 +49,7 @@ function SoundTile({ id, on, volume }: { id: SoundId; on: boolean; volume: numbe
       </button>
       <div className={styles.volume} inert={!on}>
         <Slider
-          label={`${sound.label} volume`}
+          label={t.sounds.volume(sound.label)}
           value={volume}
           onChange={(value) => setChannelVolume(id, value)}
         />

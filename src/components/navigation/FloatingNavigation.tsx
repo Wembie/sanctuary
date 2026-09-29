@@ -1,5 +1,6 @@
-import { ROUTES, type RoutePath } from '../../app/routes';
+import { ROUTE_NAME, type RoutePath } from '../../app/routes';
 import { useStore } from '../../hooks/useStore';
+import { useT } from '../../i18n';
 import { sceneStore } from '../../store/scene';
 import { Icon, type IconName } from '../ui/Icon';
 import { Link } from './Link';
@@ -15,18 +16,19 @@ const ITEMS: { path: RoutePath; icon: IconName }[] = [
 ];
 
 export function FloatingNavigation({ route }: { route: RoutePath }) {
+  const t = useT();
   const hidden = useStore(sceneStore, (s) => s.immersive || s.stillness);
 
   return (
     <nav
-      aria-label="Main"
+      aria-label="Sanctuary"
       className={`${styles.nav} glass chrome`}
       data-hidden={hidden || undefined}
       inert={hidden}
     >
       <ul className={styles.list}>
         {ITEMS.map(({ path, icon }) => {
-          const label = ROUTES[path].label;
+          const label = t.routes[ROUTE_NAME[path]];
           const current = route === path;
           return (
             <li key={path}>
@@ -50,8 +52,8 @@ export function FloatingNavigation({ route }: { route: RoutePath }) {
           <button
             type="button"
             className={styles.item}
-            aria-label="Settings"
-            title="Settings"
+            aria-label={t.common.settings}
+            title={t.common.settings}
             aria-haspopup="dialog"
             onClick={() => sceneStore.set({ settingsOpen: true })}
           >

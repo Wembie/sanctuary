@@ -1,31 +1,34 @@
 import type { CSSProperties } from 'react';
 import { selectEnvironment } from '../app/actions';
 import { useStore } from '../hooks/useStore';
+import { useT } from '../i18n';
 import { experienceStore } from '../store/experience';
 import { ENVIRONMENT_IDS, ENVIRONMENTS } from '../themes/environments';
 import styles from './Page.module.css';
 import local from './ExplorePage.module.css';
 
 export default function ExplorePage() {
+  const t = useT();
   const current = useStore(experienceStore, (s) => s.environment);
 
   return (
     <div className={styles.page}>
       <div className={styles.column}>
         <header className={`${styles.header} arrive`}>
-          <h1 className={styles.display}>Somewhere else.</h1>
-          <p className={styles.lead}>Each place has its own light and its own sound.</p>
+          <h1 className={styles.display}>{t.explore.title}</h1>
+          <p className={styles.lead}>{t.explore.lead}</p>
         </header>
 
         <ul className={local.places} role="list">
           {ENVIRONMENT_IDS.map((id, index) => {
-            const env = ENVIRONMENTS[id];
+            const { palette } = ENVIRONMENTS[id];
+            const place = t.explore.places[id];
             const here = id === current;
             const swatch = {
-              '--sw-top': env.palette.bgTop,
-              '--sw-bottom': env.palette.horizon,
-              '--sw-glow': env.palette.glow,
-              '--sw-accent': env.palette.accent,
+              '--sw-top': palette.bgTop,
+              '--sw-bottom': palette.horizon,
+              '--sw-glow': palette.glow,
+              '--sw-accent': palette.accent,
               animationDelay: `${index * 90}ms`,
             } as CSSProperties;
             return (
@@ -38,11 +41,11 @@ export default function ExplorePage() {
                 >
                   <span className={local.swatch} aria-hidden="true" />
                   <span className={local.text}>
-                    <span className={local.name}>{env.name}</span>
-                    <span className={local.line}>{env.line}</span>
+                    <span className={local.name}>{place.name}</span>
+                    <span className={local.line}>{place.line}</span>
                   </span>
                   <span className={local.here} aria-hidden={!here}>
-                    {here ? 'You are here' : ''}
+                    {here ? t.explore.here : ''}
                   </span>
                 </button>
               </li>
@@ -50,7 +53,7 @@ export default function ExplorePage() {
           })}
         </ul>
 
-        <p className={`${local.tip} arrive`}>Touch the empty sky. It answers, quietly.</p>
+        <p className={`${local.tip} arrive`}>{t.explore.tip}</p>
       </div>
     </div>
   );

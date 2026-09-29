@@ -53,6 +53,13 @@ export class AudioManager {
   private analyser: AnalyserNode | null = null;
   private output: BackgroundOutput | null = null;
   private readonly externalPauseListeners = new Set<() => void>();
+  /**
+   * What the app asked for, remembered even before audio is unlocked. Stores are
+   * restored from localStorage on load, long before the first user gesture; without
+   * this, a saved mix would stay silent until something changed.
+   */
+  private desiredMix: SoundMix = {};
+  private desiredMusic: { track: MusicTrack | null; volume: number } = { track: null, volume: 0 };
   private samples: Uint8Array<ArrayBuffer> | null = null;
   private readonly voices = new Map<SoundId, Voice>();
   /** One piece of music at a time; the previous one fades out on its own. */
@@ -128,6 +135,9 @@ export class AudioManager {
     });
     this.syncStatus();
     this.applyMaster(0.01);
+    // Now that there is somewhere to play it, start what was asked for before the unlock.
+    this.sync(this.desiredMix);
+    this.playMusic(this.desiredMusic.track, this.desiredMusic.volume);
   }
 
   private wakeIfNeeded(): void {
@@ -154,6 +164,7 @@ export class AudioManager {
 
   /** Reconciles playing voices with the desired mix, crossfading every change. */
   sync(desired: SoundMix, fade = DEFAULT_FADE): void {
+    this.desiredMix = desired;
     const ctx = this.ctx;
     const bus = this.bus;
     if (!ctx || !bus) return;
@@ -280,6 +291,7 @@ export class AudioManager {
    * Generative pieces are composed live; file tracks stream from the page.
    */
   playMusic(track: MusicTrack | null, volume: number, fade = 3.5): void {
+    this.desiredMusic = { track, volume };
     const ctx = this.ctx;
     const bus = this.bus;
     if (!ctx || !bus) return;

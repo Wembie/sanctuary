@@ -16,6 +16,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ### Changed
 
+- Hover effects only apply on devices that can hover: no more buttons stuck "highlighted"
+  after a tap on phones and tablets. Keyboard focus styles are unchanged.
 - Home: the Sleep hint now says what actually happens ("Let the screen fade to dark") instead
   of "Let the room go dark", which read as if it controlled the lights. All four languages.
 

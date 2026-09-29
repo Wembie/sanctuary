@@ -39,6 +39,8 @@
   background: var(--surface);
 }
 
-.return:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .return:hover {
+    color: var(--text-primary);
+  }
 }

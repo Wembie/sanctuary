@@ -62,9 +62,11 @@
     background var(--dur-fast) var(--ease-calm);
 }
 
-.close:hover {
-  color: var(--text-primary);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .close:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
 }
 
 @keyframes panel-in {

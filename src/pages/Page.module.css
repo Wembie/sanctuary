@@ -97,11 +97,13 @@
     transform var(--dur-fast) var(--ease-calm);
 }
 
-.action:hover {
-  background: var(--surface-hover);
-  border-color: rgb(var(--accent-rgb) / 0.45);
-  box-shadow: 0 0 30px -8px rgb(var(--glow-rgb) / 0.55);
-  transform: scale(1.02);
+@media (hover: hover) {
+  .action:hover {
+    background: var(--surface-hover);
+    border-color: rgb(var(--accent-rgb) / 0.45);
+    box-shadow: 0 0 30px -8px rgb(var(--glow-rgb) / 0.55);
+    transform: scale(1.02);
+  }
 }
 
 .action:active {
@@ -115,11 +117,13 @@
   color: var(--text-secondary);
 }
 
-.ghost:hover {
-  color: var(--text-primary);
-  background: var(--surface);
-  border-color: var(--border);
-  box-shadow: none;
+@media (hover: hover) {
+  .ghost:hover {
+    color: var(--text-primary);
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: none;
+  }
 }
 
 .row {

@@ -52,9 +52,11 @@
     transform var(--dur-fast) var(--ease-calm);
 }
 
-.track:hover {
-  background: var(--surface);
-  border-color: var(--border);
+@media (hover: hover) {
+  .track:hover {
+    background: var(--surface);
+    border-color: var(--border);
+  }
 }
 
 .track:active {

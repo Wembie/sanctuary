@@ -135,10 +135,12 @@
   letter-spacing: 0.04em;
 }
 
-.control:hover,
-.endButton:hover {
-  color: var(--text-primary);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .control:hover,
+  .endButton:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
 }
 
 .control:active,

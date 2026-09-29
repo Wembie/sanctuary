@@ -78,6 +78,8 @@ Key mechanics:
   colors that belong to the theme; use `var(--accent)`, `rgb(var(--glow-rgb) / 0.5)`, etc.
   Glassmorphism only on controls/overlays (`.glass`). Things that should fade when idle get
   the global `chrome` class.
+- **Hover**: wrap every `:hover` rule in `@media (hover: hover)` (touch screens keep hover
+  "stuck" after a tap). Keep `:focus-visible` outside the media query.
 - **Motion**: slow durations (`--dur-*` tokens), `--ease-calm`/`--ease-soft-out`, no bounce.
   Always handle `:root[data-motion='reduced']`. Entrance animations use `animation-fill-mode:
 backwards` (not `both`), or they will override later opacity fades.

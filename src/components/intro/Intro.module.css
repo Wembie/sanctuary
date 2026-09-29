@@ -156,7 +156,6 @@
   }
 }
 
-.door:hover .arch,
 .door:focus-visible .arch {
   border-color: rgb(var(--accent-rgb) / 0.75);
   box-shadow:
@@ -165,10 +164,26 @@
   transform: scale(1.02);
 }
 
-.door:hover .archLight,
+@media (hover: hover) {
+  .door:hover .arch {
+    border-color: rgb(var(--accent-rgb) / 0.75);
+    box-shadow:
+      0 0 40px -6px rgb(var(--glow-rgb) / 0.6),
+      inset 0 -20px 30px -10px rgb(var(--glow-rgb) / 0.4);
+    transform: scale(1.02);
+  }
+}
+
 .door:focus-visible .archLight {
   opacity: 1;
   animation: none;
+}
+
+@media (hover: hover) {
+  .door:hover .archLight {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 .door:active .arch {
@@ -200,8 +215,10 @@
   transition: color var(--dur-base) var(--ease-calm);
 }
 
-.silent:hover {
-  color: var(--text-secondary);
+@media (hover: hover) {
+  .silent:hover {
+    color: var(--text-secondary);
+  }
 }
 
 :root[data-motion='reduced'] .loaderOrb,

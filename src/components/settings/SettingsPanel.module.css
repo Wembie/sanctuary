@@ -31,8 +31,10 @@
   transition: color var(--dur-fast) var(--ease-calm);
 }
 
-.fullscreen:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .fullscreen:hover {
+    color: var(--text-primary);
+  }
 }
 
 .kbd {
@@ -66,7 +68,9 @@
     border-color var(--dur-base) var(--ease-calm);
 }
 
-.author:hover {
-  color: var(--text-primary);
-  border-color: rgb(var(--accent-rgb) / 0.6);
+@media (hover: hover) {
+  .author:hover {
+    color: var(--text-primary);
+    border-color: rgb(var(--accent-rgb) / 0.6);
+  }
 }

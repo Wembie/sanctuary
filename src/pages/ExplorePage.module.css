@@ -29,9 +29,11 @@
     transform var(--dur-fast) var(--ease-calm);
 }
 
-.place:hover {
-  background: var(--surface);
-  border-color: var(--border);
+@media (hover: hover) {
+  .place:hover {
+    background: var(--surface);
+    border-color: var(--border);
+  }
 }
 
 .place:active {
@@ -70,7 +72,6 @@
   transition: opacity var(--dur-slow) var(--ease-calm);
 }
 
-.place:hover .swatch,
 .place[aria-pressed='true'] .swatch {
   transform: scale(1.03);
   box-shadow:
@@ -78,9 +79,23 @@
     0 0 36px -6px color-mix(in srgb, var(--sw-glow) 60%, transparent);
 }
 
-.place:hover .swatch::after,
+@media (hover: hover) {
+  .place:hover .swatch {
+    transform: scale(1.03);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.14),
+      0 0 36px -6px color-mix(in srgb, var(--sw-glow) 60%, transparent);
+  }
+}
+
 .place[aria-pressed='true'] .swatch::after {
   opacity: 1;
+}
+
+@media (hover: hover) {
+  .place:hover .swatch::after {
+    opacity: 1;
+  }
 }
 
 .text {

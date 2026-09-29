@@ -230,6 +230,7 @@ export const pt: Messages = {
     fadeHint: 'Os controles somem quando você não se mexe.',
     fullscreen: 'Tela cheia',
     privacy: 'As preferências ficam neste dispositivo. Nada é enviado.',
+    madeBy: 'Feito por',
   },
 
   error: {

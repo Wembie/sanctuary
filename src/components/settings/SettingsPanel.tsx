@@ -1,4 +1,5 @@
 import { setSoundEnabled } from '../../app/actions';
+import { AUTHOR } from '../../app/credits';
 import { useStore } from '../../hooks/useStore';
 import { LOCALE_NAMES, LOCALES, useT } from '../../i18n';
 import { supportsFullscreen, toggleFullscreen } from '../../lib/device';
@@ -113,7 +114,12 @@ export function SettingsPanel() {
       )}
 
       <p className={styles.note}>{t.settings.privacy}</p>
-      <p className={styles.version}>Sanctuary v{__APP_VERSION__}</p>
+      <p className={styles.version}>
+        Sanctuary v{__APP_VERSION__} · {t.settings.madeBy}{' '}
+        <a href={AUTHOR.url} target="_blank" rel="noopener noreferrer" className={styles.author}>
+          {AUTHOR.name} ({AUTHOR.handle})
+        </a>
+      </p>
     </Modal>
   );
 }

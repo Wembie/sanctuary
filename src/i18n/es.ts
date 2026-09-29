@@ -233,6 +233,7 @@ export const es: Messages = {
     fadeHint: 'Los controles desaparecen cuando no te mueves.',
     fullscreen: 'Pantalla completa',
     privacy: 'Tus preferencias se quedan en este dispositivo. No se envía nada.',
+    madeBy: 'Hecho por',
   },
 
   error: {

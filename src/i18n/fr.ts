@@ -236,6 +236,7 @@ export const fr: Messages = {
     fadeHint: 'Les commandes disparaissent quand vous ne bougez plus.',
     fullscreen: 'Plein écran',
     privacy: 'Vos préférences restent sur cet appareil. Rien n’est envoyé.',
+    madeBy: 'Créé par',
   },
 
   error: {

@@ -224,6 +224,10 @@ no `@property` → colors switch instead of crossfading.
 Versioning follows [SemVer](https://semver.org/). `0.x` while the experience takes shape; `1.0.0`
 when it is stable, polished and complete.
 
+## Author
+
+Created and developed by **Juan** ([@Wembie](https://github.com/Wembie)).
+
 ## License
 
 [MIT](LICENSE)

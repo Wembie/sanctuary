@@ -9,6 +9,10 @@ Planned work lives in [`TODO.md`](TODO.md).
 
 ## [0.3.1] — 2026-09-29
 
+### Added
+
+- `sitemap.xml` for search engines (submit it in Google Search Console).
+
 ### Fixed
 
 - Saved sounds and music now play when you come back. Previously, after reloading, a saved mix

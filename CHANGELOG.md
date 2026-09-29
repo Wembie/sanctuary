@@ -7,6 +7,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 Planned work lives in [`TODO.md`](TODO.md).
 
+## [0.3.1] — 2026-09-29
+
+### Fixed
+
+- Saved sounds and music now play when you come back. Previously, after reloading, a saved mix
+  stayed silent until a sound was switched off and on again: the audio engine dropped requests
+  made before the first tap unlocked audio. It now remembers them and starts them on unlock.
+
 ## [0.3.0] — 2026-09-29
 
 Night-ready on mobile.
@@ -38,6 +46,7 @@ Night-ready on mobile.
   after a tap on phones and tablets. Keyboard focus styles are unchanged.
 - Home: the Sleep hint now says what actually happens ("Let the screen fade to dark") instead
   of "Let the room go dark", which read as if it controlled the lights. All four languages.
+
 
 ## [0.2.1] — 2026-09-29
 

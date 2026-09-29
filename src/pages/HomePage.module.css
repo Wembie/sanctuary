@@ -85,6 +85,7 @@
 }
 
 .needHint {
+  text-wrap: balance;
   font-size: var(--text-micro);
   color: var(--text-faint);
   letter-spacing: 0.04em;

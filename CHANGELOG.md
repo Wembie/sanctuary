@@ -5,6 +5,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+Planned work lives in [`TODO.md`](TODO.md).
+
+## [0.3.0] — 2026-09-29
+
+Night-ready on mobile.
+
 ### Added
 
 - `CLAUDE.md`: project guide for AI-assisted development (architecture, conventions, how-tos,
@@ -32,8 +38,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   after a tap on phones and tablets. Keyboard focus styles are unchanged.
 - Home: the Sleep hint now says what actually happens ("Let the screen fade to dark") instead
   of "Let the room go dark", which read as if it controlled the lights. All four languages.
-
-Planned work lives in [`TODO.md`](TODO.md).
 
 ## [0.2.1] — 2026-09-29
 

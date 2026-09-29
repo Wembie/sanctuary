@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sanctuary</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #04060d;
+      }
+    </style>
+    <script>
+      // Sanctuary uses hash routes (#/breathe). A path like /sanctuary/breathe
+      // lands here on GitHub Pages; send it softly to the right place.
+      (function () {
+        var parts = window.location.pathname.split('/').filter(Boolean);
+        var base = parts.length > 0 ? '/' + parts[0] + '/' : '/';
+        var route = parts.slice(1).join('/');
+        window.location.replace(base + (route ? '#/' + route : ''));
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

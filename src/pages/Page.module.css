@@ -1,0 +1,140 @@
+/* Every page is its own quiet scroll container above the fixed scene. */
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(var(--safe-top) + var(--space-7)) calc(var(--safe-right) + var(--gutter))
+    calc(var(--safe-bottom) + var(--nav-height) + var(--space-7))
+    calc(var(--safe-left) + var(--gutter));
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 100%;
+  text-align: center;
+}
+
+.column {
+  width: min(100%, 68rem);
+  margin: 0 auto;
+}
+
+.narrow {
+  width: min(100%, 34rem);
+  margin: 0 auto;
+}
+
+.header {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.display {
+  font-size: var(--text-display);
+  font-weight: var(--weight-thin);
+}
+
+.title {
+  font-size: var(--text-title);
+  font-weight: var(--weight-thin);
+}
+
+.lead {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-light);
+  color: var(--text-secondary);
+}
+
+.muted {
+  color: var(--text-faint);
+  font-size: var(--text-small);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: center;
+}
+
+.topBar {
+  position: fixed;
+  z-index: 15;
+  top: calc(var(--safe-top) + var(--space-4));
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  width: min(100% - 2 * var(--gutter), 36rem);
+}
+
+/* Text-only actions: a word you can press, with light instead of a box. */
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: var(--text-small);
+  letter-spacing: 0.04em;
+  transition:
+    background var(--dur-base) var(--ease-calm),
+    border-color var(--dur-base) var(--ease-calm),
+    box-shadow var(--dur-base) var(--ease-calm),
+    transform var(--dur-fast) var(--ease-calm);
+}
+
+.action:hover {
+  background: var(--surface-hover);
+  border-color: rgb(var(--accent-rgb) / 0.45);
+  box-shadow: 0 0 30px -8px rgb(var(--glow-rgb) / 0.55);
+  transform: scale(1.02);
+}
+
+.action:active {
+  transform: scale(0.98);
+}
+
+.ghost {
+  composes: action;
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.ghost:hover {
+  color: var(--text-primary);
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.bottomBar {
+  position: fixed;
+  z-index: 15;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + var(--space-5));
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-2);
+}

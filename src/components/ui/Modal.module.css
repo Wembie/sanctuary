@@ -1,0 +1,98 @@
+.dialog {
+  width: min(420px, calc(100vw - 2 * var(--space-4)));
+  max-height: min(640px, calc(100dvh - 2 * var(--space-5)));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgb(2 3 8 / 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: backdrop-in var(--dur-base) var(--ease-calm) both;
+}
+
+.dialog[open] .panel {
+  animation: panel-in var(--dur-base) var(--ease-soft-out) both;
+}
+
+.dialog[data-closing] .panel {
+  animation: panel-out 380ms var(--ease-calm) both;
+}
+
+.dialog[data-closing]::backdrop {
+  animation: backdrop-out 380ms var(--ease-calm) both;
+}
+
+.panel {
+  display: grid;
+  gap: var(--space-4);
+  max-height: inherit;
+  overflow-y: auto;
+  padding: var(--space-5);
+  border-radius: var(--radius-l);
+  background: rgb(12 14 24 / 0.86);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-light);
+  letter-spacing: 0;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: calc(-1 * var(--space-2));
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition:
+    color var(--dur-fast) var(--ease-calm),
+    background var(--dur-fast) var(--ease-calm);
+}
+
+.close:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes panel-out {
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes backdrop-out {
+  to {
+    opacity: 0;
+  }
+}

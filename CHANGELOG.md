@@ -1,0 +1,49 @@
+# Changelog
+
+All notable changes to Sanctuary are documented here.
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
+
+## [Unreleased]
+
+### Planned for v0.2 — Immersion
+
+- Audio-reactive visualizer (blobs and waves, never an equalizer)
+- Richer environment visuals (caustics, glass droplets, abstract trees)
+- Local music tracks in `public/audio/`
+
+### Planned for v0.3 — Experiences
+
+- Calm Canvas, Floating Bubbles, Grow, Zen Garden
+
+### Planned for v0.4 — Polish
+
+- Time-aware palettes, easter eggs, offline caching (PWA service worker)
+
+## [0.1.0] — 2026-09-29
+
+The foundation: a complete, calm path from arrival to rest.
+
+### Added
+
+- **Arrival**: a breathing loader, a threshold with first-visit and returning-visitor lines, and a
+  doorway that lets you enter with sound or in silence.
+- **Home**: time-aware greeting, four needs (Calm, Focus, Sleep, Disconnect), "Or simply stay",
+  "Continue your last space" and a deterministic daily pause.
+- **Ambient engine**: one canvas, adaptive particle counts, pauses in hidden tabs, degrades itself
+  on slow devices. CSS sky with aurora, mist, light rays and grain.
+- **Six environments**: Night, Ocean, Forest, Rain, Fireplace, Clouds. Each with its own palette,
+  particles and soundscape; colors crossfade through registered CSS properties.
+- **Audio engine**: single `AudioContext`, eight procedurally synthesized sounds (rain, ocean, fire,
+  forest, wind, space, storm, deep) with fades on every change, a soft limiter, and idle suspension.
+- **Sound mixer** with per-sound volume, persisted locally; empty, elegant Music section.
+- **Breathe**: Calm (4·4·6·2), Box (4·4·4·4), Deep (4·7·8) and Custom rhythms, an orb that fills
+  with the breath, the whole particle field breathing along, optional timer.
+- **Focus** (25/45/60/custom), **Sleep** (15/30/60/90/∞ with gradual dimming and a late audio fade),
+  **Disconnect** (5/10/20/30) and **Do nothing** mode.
+- Interface that fades when idle, custom cursor on fine pointers, touch-first mobile layout.
+- Settings: sound, master volume, motion, performance mode, particles, auto-hide, fullscreen.
+- Accessibility: semantic landmarks, keyboard navigation (arrow-key radio groups, Space to pause
+  breathing, F fullscreen, M sound, Esc), visible focus, live regions, reduced-motion support.
+- Hash routing for GitHub Pages, 404 fallback, SEO and Open Graph metadata, web manifest.
+- Tests for breathing math, timers, sleep curve, storage, sanitizers, mix planning, themes, routes.
+- GitHub Actions: lint, format, typecheck, test, build and deploy to GitHub Pages.

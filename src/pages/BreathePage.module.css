@@ -1,0 +1,62 @@
+.stage {
+  display: grid;
+  place-items: center;
+  padding-top: var(--space-7);
+}
+
+.settling {
+  --orb-size: min(58vmin, 340px);
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+}
+
+.restingOrb {
+  width: var(--orb-size);
+  height: var(--orb-size);
+  border-radius: 50%;
+  transform: scale(0.58);
+  background: radial-gradient(
+    circle,
+    rgb(var(--accent-rgb) / 0.22) 0%,
+    rgb(var(--glow-rgb) / 0.18) 55%,
+    transparent 74%
+  );
+  animation: settle-in 3s var(--ease-soft-out) backwards;
+}
+
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+.settleText {
+  min-height: 4.5rem;
+  font-size: var(--text-title);
+  font-weight: var(--weight-thin);
+  letter-spacing: 0.04em;
+}
+
+.footer {
+  position: fixed;
+  z-index: 15;
+  right: calc(var(--safe-right) + var(--gutter));
+  top: calc(var(--safe-top) + var(--space-4));
+}
+
+@media (max-width: 700px) {
+  .footer {
+    top: auto;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: calc(var(--safe-bottom) + var(--nav-height) + var(--space-6));
+  }
+}
+
+@media (max-height: 640px) {
+  .stage {
+    padding-top: var(--space-8);
+  }
+}

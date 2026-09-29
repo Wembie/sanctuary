@@ -1,0 +1,44 @@
+.stillness {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  text-align: center;
+}
+
+.line {
+  min-height: 1.3em;
+  font-size: var(--text-title);
+  font-weight: var(--weight-thin);
+  letter-spacing: 0.01em;
+  opacity: 0;
+  filter: blur(8px);
+  transition:
+    opacity 2.6s var(--ease-calm),
+    filter 2.6s var(--ease-calm);
+}
+
+.line[data-visible] {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.return {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + var(--space-6));
+  transform: translateX(-50%);
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.return:hover {
+  color: var(--text-primary);
+}

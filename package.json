@@ -2,6 +2,12 @@
   "name": "sanctuary",
   "private": true,
   "description": "A quiet place for a noisy world. An immersive, client-side space for breathing, relaxing, focusing and slowing down.",
+  "author": "Juan (Wembie) (https://github.com/Wembie)",
+  "homepage": "https://wembie.github.io/sanctuary/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wembie/sanctuary.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

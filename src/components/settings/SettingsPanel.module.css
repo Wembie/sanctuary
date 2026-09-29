@@ -57,3 +57,16 @@
   color: var(--text-faint);
   font-variant-numeric: tabular-nums;
 }
+
+.author {
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-strong);
+  transition:
+    color var(--dur-base) var(--ease-calm),
+    border-color var(--dur-base) var(--ease-calm);
+}
+
+.author:hover {
+  color: var(--text-primary);
+  border-color: rgb(var(--accent-rgb) / 0.6);
+}

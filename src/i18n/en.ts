@@ -229,6 +229,7 @@ export const en = {
     fadeHint: 'Controls disappear when you’re still.',
     fullscreen: 'Fullscreen',
     privacy: 'Preferences stay on this device. Nothing is sent anywhere.',
+    madeBy: 'Made by',
   },
 
   error: {

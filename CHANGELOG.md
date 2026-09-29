@@ -18,6 +18,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 - Time-aware palettes, easter eggs, offline caching (PWA service worker)
 
+## [0.2.1] — 2026-09-29
+
+### Added
+
+- Author credit: "Made by Juan (Wembie)" in Settings, linked to GitHub, in all four languages;
+  author metadata in `index.html`, `package.json` and the README.
+
 ## [0.2.0] — 2026-09-29
 
 Languages and music.

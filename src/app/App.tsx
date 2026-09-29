@@ -21,6 +21,7 @@ import {
   useKeyboardShortcuts,
 } from './useAppEffects';
 import { ErrorBoundary } from './ErrorBoundary';
+import { useMediaSession } from './useMediaSession';
 import { useSessionEffects } from './useSessionEffects';
 import styles from './App.module.css';
 
@@ -42,6 +43,7 @@ export function App() {
   useDocumentState(route, entered);
   useKeyboardShortcuts(entered);
   useSessionEffects();
+  useMediaSession();
 
   const onLoaded = useCallback(() => setStage('threshold'), []);
   const onEnter = useCallback(() => {

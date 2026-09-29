@@ -9,7 +9,7 @@ If it adds pressure (streaks, stats, notifications), it doesn't belong here.
 ## v0.3.0 — Night-ready on mobile
 
 - [x] **Wake Lock**: keep the screen on during Breathe and Focus (release on pause/leave; graceful when unsupported)
-- [ ] **Media Session**: lock-screen title and play/pause for music; audio keeps playing in the background
+- [x] **Media Session**: lock-screen title and play/pause for music; audio keeps playing in the background
 - [x] **PWA offline**: service worker caching the app shell and assets; installable; PNG icons (192/512, maskable)
 - [x] **Sessions survive navigation**: a running Focus/Disconnect/Sleep timer keeps going when you change pages
 - [x] **Music sleep timer**: fade the music out after 15 / 30 / 60 min without entering Sleep mode
@@ -42,6 +42,8 @@ If it adds pressure (streaks, stats, notifications), it doesn't belong here.
 
 - [ ] **Easter eggs**: a special star, seven taps, long-press on the logo; discoveries, never a game
 - [ ] **Open Graph image** for shared links
+- [ ] **Verify on real devices**: background audio and lock-screen controls (iOS Safari, Android
+      Chrome), install/offline, wake lock
 - [ ] **Verify glass effects** (`backdrop-filter`) on real Safari/iOS and Android devices
 
 ## Quality and infrastructure (anytime)

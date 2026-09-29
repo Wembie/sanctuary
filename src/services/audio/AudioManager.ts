@@ -1,3 +1,4 @@
+import { BackgroundOutput } from './backgroundOutput';
 import type { SoundId, SoundMix } from './catalog';
 import { chime, GENERATORS } from './generators';
 import { perceptualGain, planMix } from './mix';
@@ -50,6 +51,8 @@ export class AudioManager {
   private bus: GainNode | null = null;
   private master: GainNode | null = null;
   private analyser: AnalyserNode | null = null;
+  private output: BackgroundOutput | null = null;
+  private readonly externalPauseListeners = new Set<() => void>();
   private samples: Uint8Array<ArrayBuffer> | null = null;
   private readonly voices = new Map<SoundId, Voice>();
   /** One piece of music at a time; the previous one fades out on its own. */
@@ -87,6 +90,7 @@ export class AudioManager {
     try {
       if (!this.ctx) this.build(createContext(Ctor));
       void this.ctx?.resume().catch(() => undefined);
+      this.output?.start();
       return true;
     } catch {
       this.setStatus('unsupported');
@@ -111,6 +115,10 @@ export class AudioManager {
     this.analyser.smoothingTimeConstant = 0.9;
     this.samples = new Uint8Array(new ArrayBuffer(this.analyser.fftSize));
     this.bus.connect(limiter).connect(this.master).connect(this.analyser).connect(ctx.destination);
+    this.output = new BackgroundOutput(ctx, this.analyser);
+    this.output.onExternalPause(() =>
+      this.externalPauseListeners.forEach((listener) => listener()),
+    );
 
     ctx.addEventListener('statechange', () => this.syncStatus());
     // iOS and some Androids suspend on interruption; try again on the next touch.
@@ -216,7 +224,12 @@ export class AudioManager {
     this.masterVolume = volume;
     this.enabled = enabled;
     this.applyMaster(fade);
-    if (enabled) this.wakeIfNeeded();
+    if (enabled) {
+      this.wakeIfNeeded();
+      this.output?.resume();
+    } else {
+      this.output?.pauseAfter(fade + 0.3);
+    }
     this.scheduleIdleCheck();
   }
 
@@ -240,6 +253,14 @@ export class AudioManager {
     param.setValueAtTime(param.value, now);
     // setTargetAtTime is exponential-ish and never clicks; a third of the fade reaches ~95%.
     param.setTargetAtTime(target, now, Math.max(0.01, seconds / 3));
+  }
+
+  /** The OS paused playback (lock screen, headphones unplugged). */
+  onExternalPause(listener: () => void): () => void {
+    this.externalPauseListeners.add(listener);
+    return () => {
+      this.externalPauseListeners.delete(listener);
+    };
   }
 
   /** 0 – 1 loudness of what is actually coming out of the speakers. */

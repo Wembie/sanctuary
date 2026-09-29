@@ -21,6 +21,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - **Works offline and installs like an app** (PWA): a build-generated service worker precaches
   the app; new versions take over once the old one is closed. PNG and maskable icons, an
   Apple touch icon, and a richer web manifest. Music files stay online-only.
+- **Lock-screen controls and background audio** (Media Session): shows the piece or place that is
+  playing with artwork; play/pause map to the sound switch. Audio is routed through a media element
+  so phones keep it playing with the screen locked; if that isn't possible, output stays direct.
+  Pausing from outside (headphones unplugged) turns sound off in the app too.
 
 ### Changed
 

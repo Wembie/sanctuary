@@ -7,6 +7,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 Planned work lives in [`TODO.md`](TODO.md).
 
+## [0.3.2] — 2026-09-29
+
+### Added
+
+- `sitemap.xml` for search engines (submit it in Google Search Console).
+- Google Search Console verification file.
+
 ## [0.3.1] — 2026-09-29
 
 ### Fixed

@@ -1,13 +1,20 @@
 import type { SoundId, SoundMix } from './catalog';
 import { chime, GENERATORS } from './generators';
 import { perceptualGain, planMix } from './mix';
-import type { VoiceGraph } from './synthesis';
+import { createPiece } from './music/composer';
+import { createFileVoice } from './music/fileVoice';
+import type { MusicTrack } from './music/library';
+
+/** Anything that plays and can be torn down completely. */
+interface Disposable {
+  dispose(): void;
+}
 
 export type AudioStatus = 'unsupported' | 'locked' | 'running' | 'suspended';
 
 interface Voice {
   gain: GainNode;
-  graph: VoiceGraph;
+  graph: Disposable;
   volume: number;
   disposeTimer?: number;
 }
@@ -45,6 +52,8 @@ export class AudioManager {
   private analyser: AnalyserNode | null = null;
   private samples: Uint8Array<ArrayBuffer> | null = null;
   private readonly voices = new Map<SoundId, Voice>();
+  /** One piece of music at a time; the previous one fades out on its own. */
+  private music: (Voice & { id: string }) | null = null;
   private readonly listeners = new Set<() => void>();
   private masterVolume = 0.7;
   private masterScale = 1;
@@ -114,7 +123,12 @@ export class AudioManager {
   }
 
   private wakeIfNeeded(): void {
-    if (this.ctx && this.ctx.state !== 'running' && this.enabled && this.voices.size > 0) {
+    if (
+      this.ctx &&
+      this.ctx.state !== 'running' &&
+      this.enabled &&
+      (this.voices.size > 0 || this.music)
+    ) {
       void this.ctx.resume().catch(() => undefined);
     }
   }
@@ -240,6 +254,50 @@ export class AudioManager {
     return Math.min(1, Math.sqrt(sum / this.samples.length) * 3);
   }
 
+  /**
+   * Plays one track (or nothing), crossfading from whatever played before.
+   * Generative pieces are composed live; file tracks stream from the page.
+   */
+  playMusic(track: MusicTrack | null, volume: number, fade = 3.5): void {
+    const ctx = this.ctx;
+    const bus = this.bus;
+    if (!ctx || !bus) return;
+    const current = this.music;
+    if (current && track && current.id === track.id) {
+      current.volume = volume;
+      this.ramp(current.gain.gain, perceptualGain(volume), 0.4);
+      return;
+    }
+    if (current) {
+      this.music = null;
+      this.ramp(current.gain.gain, 0, fade);
+      window.setTimeout(
+        () => {
+          current.graph.dispose();
+          current.gain.disconnect();
+        },
+        fade * 1000 + 200,
+      );
+    }
+    if (track) {
+      try {
+        const gain = ctx.createGain();
+        gain.gain.value = 0;
+        gain.connect(bus);
+        const graph =
+          track.kind === 'generative'
+            ? createPiece(ctx, gain, track.recipe)
+            : createFileVoice(ctx, gain, track.src);
+        this.music = { id: track.id, gain, graph, volume };
+        this.ramp(gain.gain, perceptualGain(volume), fade);
+        if (ctx.state !== 'running' && this.enabled) void ctx.resume().catch(() => undefined);
+      } catch {
+        /* music stays silent; nothing else is affected */
+      }
+    }
+    this.scheduleIdleCheck();
+  }
+
   playChime(): void {
     if (!this.ctx || !this.bus || !this.enabled) return;
     try {
@@ -252,7 +310,7 @@ export class AudioManager {
   private scheduleIdleCheck(): void {
     window.clearTimeout(this.idleTimer);
     this.idleTimer = window.setTimeout(() => {
-      const silent = !this.enabled || this.voices.size === 0;
+      const silent = !this.enabled || (this.voices.size === 0 && !this.music);
       if (silent && this.ctx?.state === 'running') void this.ctx.suspend().catch(() => undefined);
     }, IDLE_SUSPEND_MS);
   }
@@ -265,6 +323,8 @@ export class AudioManager {
       voice.gain.disconnect();
     });
     this.voices.clear();
+    this.music?.graph.dispose();
+    this.music = null;
     void this.ctx?.close().catch(() => undefined);
     this.ctx = null;
     this.listeners.clear();

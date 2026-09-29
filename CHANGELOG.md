@@ -12,8 +12,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   Dictionaries are typed against English, so a missing translation fails the build. `<html lang>`
   and page titles follow the language.
 
+- **Generative music**: seven original pieces (Slow Tide, Low Lantern, Clear Water, Stone Bell,
+  Morning Moss, Aurora, Rain Tapes), one per category, composed live from recipes by a small
+  engine: pads, bells, arpeggios, singing bowls, lo-fi keys with tape wobble, soft drums, and a
+  generated reverb. One track at a time, crossfaded, with its own volume; the choice persists.
+- **Automatic local tracks**: files dropped into `src/assets/music/<category>/` appear in the
+  Music list with no code changes; an optional sidecar JSON sets title and credit.
+
 ### Changed
 
+- Music files moved from `public/audio/` to `src/assets/music/` (bundled and fingerprinted).
 - Display text moved out of data modules (environments, sounds, techniques, routes) into the
   dictionaries in `src/i18n/`; data now carries only ids.
 
@@ -21,7 +29,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 - Audio-reactive visualizer (blobs and waves, never an equalizer)
 - Richer environment visuals (caustics, glass droplets, abstract trees)
-- Local music tracks in `public/audio/`
 
 ### Planned for v0.3 — Experiences
 

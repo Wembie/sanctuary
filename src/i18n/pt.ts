@@ -101,8 +101,41 @@ export const pt: Messages = {
     section: 'Sons ambientes',
     saved: 'Sua mistura fica salva neste dispositivo.',
     music: 'Música',
-    empty: 'Ainda não há nada aqui.',
-    emptyHint: 'Em breve, peças originais de licença livre vão morar aqui.',
+
+    musicLead:
+      'Peças originais compostas ao vivo enquanto você ouve. Nunca soam iguais duas vezes.',
+    musicVolume: 'Volume da música',
+    play: (title) => `Tocar ${title}`,
+    stop: (title) => `Parar ${title}`,
+    live: 'ao vivo',
+    yourTrack: 'Sua faixa',
+    pieces: {
+      'slow-tide': {
+        title: 'Maré lenta',
+        description: 'Acordes amplos e quentes que vêm e vão como a água.',
+      },
+      'low-lantern': {
+        title: 'Lanterna baixa',
+        description: 'Escura e suave. Feita para pegar no sono.',
+      },
+      'clear-water': {
+        title: 'Água clara',
+        description: 'Um pulso firme e suave para pensar dentro dele.',
+      },
+      'stone-bell': {
+        title: 'Sino de pedra',
+        description: 'Um zumbido e uma tigela tibetana, bem espaçados.',
+      },
+      'morning-moss': {
+        title: 'Musgo da manhã',
+        description: 'Sinos brilhantes sobre acordes verdes e suaves.',
+      },
+      aurora: { title: 'Aurora', description: 'Luz que cintila e muda devagar.' },
+      'rain-tapes': {
+        title: 'Fitas de chuva',
+        description: 'Teclas quentes, uma batida preguiçosa, um pouco de poeira de fita.',
+      },
+    },
     volume: (sound) => `Volume de ${sound.toLowerCase()}`,
     items: {
       rain: { label: 'Chuva', description: 'Chuva constante numa rua tranquila' },

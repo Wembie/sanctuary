@@ -1,11 +1,11 @@
 import { setSoundEnabled } from '../app/actions';
+import { MusicPlayer } from '../components/audio/MusicPlayer';
 import { SoundMixer } from '../components/audio/SoundMixer';
 import { Icon } from '../components/ui/Icon';
 import { Slider } from '../components/ui/Slider';
 import { useStore } from '../hooks/useStore';
 import { useT } from '../i18n';
 import { audio } from '../services/audio/AudioManager';
-import { MUSIC_TRACKS } from '../services/audio/catalog';
 import { settingsStore } from '../store/settings';
 import styles from './Page.module.css';
 import local from './SoundsPage.module.css';
@@ -57,22 +57,8 @@ export default function SoundsPage() {
           <h2 id="music-title" className={local.sectionTitle}>
             {t.sounds.music}
           </h2>
-          {MUSIC_TRACKS.length === 0 ? (
-            <div className={local.empty}>
-              <span className={local.emptyOrb} aria-hidden="true" />
-              <p>{t.sounds.empty}</p>
-              <p className={styles.muted}>{t.sounds.emptyHint}</p>
-            </div>
-          ) : (
-            <ul className={local.tracks}>
-              {MUSIC_TRACKS.map((track) => (
-                <li key={track.id}>
-                  {track.title}{' '}
-                  <span className={styles.muted}>{t.sounds.categories[track.category]}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+          <p className={`${styles.muted} ${local.musicLead}`}>{t.sounds.musicLead}</p>
+          <MusicPlayer />
         </section>
       </div>
     </div>

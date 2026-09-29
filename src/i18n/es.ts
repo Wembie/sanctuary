@@ -104,8 +104,41 @@ export const es: Messages = {
     section: 'Sonidos ambientales',
     saved: 'Tu mezcla se recuerda en este dispositivo.',
     music: 'Música',
-    empty: 'Todavía no hay nada aquí.',
-    emptyHint: 'Pronto vivirán aquí piezas originales de licencia libre.',
+
+    musicLead:
+      'Piezas originales que se componen en vivo mientras escuchas. Nunca suenan igual dos veces.',
+    musicVolume: 'Volumen de la música',
+    play: (title) => `Reproducir ${title}`,
+    stop: (title) => `Detener ${title}`,
+    live: 'en vivo',
+    yourTrack: 'Tu pista',
+    pieces: {
+      'slow-tide': {
+        title: 'Marea lenta',
+        description: 'Acordes amplios y cálidos que van y vienen como el agua.',
+      },
+      'low-lantern': {
+        title: 'Linterna tenue',
+        description: 'Oscura y suave. Hecha para quedarse dormido.',
+      },
+      'clear-water': {
+        title: 'Agua clara',
+        description: 'Un pulso estable y suave para pensar dentro de él.',
+      },
+      'stone-bell': {
+        title: 'Campana de piedra',
+        description: 'Un zumbido y un cuenco tibetano, muy espaciados.',
+      },
+      'morning-moss': {
+        title: 'Musgo de mañana',
+        description: 'Campanas brillantes sobre acordes verdes y suaves.',
+      },
+      aurora: { title: 'Aurora', description: 'Luz que brilla y cambia despacio.' },
+      'rain-tapes': {
+        title: 'Cintas de lluvia',
+        description: 'Teclas cálidas, un ritmo perezoso y algo de polvo de cinta.',
+      },
+    },
     volume: (sound) => `Volumen de ${sound.toLowerCase()}`,
     items: {
       rain: { label: 'Lluvia', description: 'Lluvia constante en una calle tranquila' },

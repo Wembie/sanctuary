@@ -15,17 +15,17 @@ Every decision in this repository (design, motion, sound, code) is measured agai
 
 ## What's inside
 
-| Space          | What it does                                                                                      |
-| -------------- | ------------------------------------------------------------------------------------------------- |
-| **Threshold**  | A few quiet lines, then a doorway. Enter with sound or in silence.                                |
-| **Home**       | A greeting for the time of day, four needs, "Or simply stay", and a daily pause.                  |
-| **Breathe**    | An orb that fills with your breath. Calm (4·4·6·2), Box (4·4·4·4), Deep (4·7·8), Custom.          |
-| **Sounds**     | Eight synthesized soundscapes you can layer: rain, ocean, fire, forest, wind, space, storm, deep. |
-| **Focus**      | 25 / 45 / 60 / custom minutes. A hairline ring, a soft tone, and "You did enough."                |
-| **Sleep**      | The screen dims gradually; the sound follows only at the end. 15 / 30 / 60 / 90 / ∞.              |
-| **Disconnect** | "Put your phone down." Then nothing but the place, until "Welcome back."                          |
-| **Explore**    | Six places: Night, Ocean, Forest, Rain, Fireplace, Clouds. Sky, particles and sound all follow.   |
-| **Stillness**  | "You don't have to do anything." Then every piece of interface leaves.                            |
+| Space          | What it does                                                                                    |
+| -------------- | ----------------------------------------------------------------------------------------------- |
+| **Threshold**  | A few quiet lines, then a doorway. Enter with sound or in silence.                              |
+| **Home**       | A greeting for the time of day, four needs, "Or simply stay", and a daily pause.                |
+| **Breathe**    | An orb that fills with your breath. Calm (4·4·6·2), Box (4·4·4·4), Deep (4·7·8), Custom.        |
+| **Sounds**     | Eight synthesized soundscapes you can layer, plus seven pieces of music composed live.          |
+| **Focus**      | 25 / 45 / 60 / custom minutes. A hairline ring, a soft tone, and "You did enough."              |
+| **Sleep**      | The screen dims gradually; the sound follows only at the end. 15 / 30 / 60 / 90 / ∞.            |
+| **Disconnect** | "Put your phone down." Then nothing but the place, until "Welcome back."                        |
+| **Explore**    | Six places: Night, Ocean, Forest, Rain, Fireplace, Clouds. Sky, particles and sound all follow. |
+| **Stillness**  | "You don't have to do anything." Then every piece of interface leaves.                          |
 
 Touch the empty sky anywhere and it answers with a slow ring. Now and then, at night, a shooting star.
 
@@ -139,22 +139,51 @@ components are verified by hand, in a browser, on real devices.
 npm test
 ```
 
-## Deployment (GitHub Pages)
+## CI/CD, deployment and releases
 
-Every push to `main` runs `.github/workflows/ci.yml`: install → lint → format check → typecheck →
-test → build → deploy. Pull requests run everything except deploy.
+One pipeline, `.github/workflows/ci.yml`:
+
+| Trigger        | Jobs                                                                           |
+| -------------- | ------------------------------------------------------------------------------ |
+| Pull request   | **verify**: version check → install → lint → format → typecheck → test → build |
+| Push to `main` | **verify** → **deploy** (GitHub Pages) → **release** (tag + GitHub Release)    |
+
+### Versioning: the `VERSION` file
+
+`VERSION` (one line, SemVer) is the single source of truth. The app reads it at build time
+(shown in Settings), CI validates it, and the release job uses it. `package.json` deliberately
+has no `version` field, so there is nothing to keep in sync.
+
+To release:
+
+1. Change `VERSION`, e.g. `0.3.0`.
+2. Add a `## [0.3.0] — YYYY-MM-DD` section to `CHANGELOG.md` (CI fails if it's missing).
+3. Merge to `main`.
+
+The pipeline then creates the `v0.3.0` tag, publishes the GitHub Release with that changelog
+section as notes, and attaches `sanctuary-v0.3.0.zip` (the built site). Nothing is tagged or
+released by hand. Check locally with `npm run version:check`.
 
 One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 
 The build uses a relative `base` (`./`), so it works under `/<repo>/`, at a custom domain, or from
 any static file server without changes.
 
-## Audio assets
+## Music and audio assets
 
-All ambient sound is synthesized in the browser; the repository contains no audio files.
-Optional music tracks can be added to `public/audio/` and registered in
-`src/services/audio/catalog.ts`. Only add audio you are allowed to redistribute. See
-[`public/audio/README.md`](public/audio/README.md).
+The repository contains no audio files. Everything you hear is made in the browser:
+
+- **Ambient sounds**: eight noise-and-oscillator generators (`src/services/audio/generators.ts`).
+- **Music**: seven original pieces, one per category, composed live by a small generative
+  engine (`src/services/audio/music/`). A `Recipe` describes a piece (root, chord progression,
+  tempo, instruments: pads, bells, arpeggio, singing bowl, lo-fi keys and drums, reverb); the
+  composer schedules it ahead on the audio clock forever, never quite the same way twice.
+  Only one piece plays at a time; changing tracks crossfades.
+
+**Your own tracks**: drop a file into `src/assets/music/<category>/` (e.g. `sleep/night-swim.mp3`)
+and rebuild. It's discovered automatically with `import.meta.glob`; an optional `night-swim.json`
+beside it sets the title and credit. Only add audio you may redistribute. See
+[`src/assets/music/README.md`](src/assets/music/README.md).
 
 ## Accessibility
 
@@ -189,7 +218,8 @@ no `@property` → colors switch instead of crossfading.
    `perf: batch ember rendering`, `a11y: label duration picker`.
 4. Before opening a PR, ask of your change: _is anything here faster, louder or busier than it
    needs to be?_ If so, slow it down.
-5. Update `CHANGELOG.md` under **Unreleased**.
+5. Update `CHANGELOG.md` under **Unreleased**. Maintainers cut a release by bumping `VERSION`
+   (see [CI/CD, deployment and releases](#cicd-deployment-and-releases)).
 
 Versioning follows [SemVer](https://semver.org/). `0.x` while the experience takes shape; `1.0.0`
 when it is stable, polished and complete.

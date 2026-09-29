@@ -15,11 +15,7 @@ export type SoundId = (typeof SOUND_IDS)[number];
 
 export type SoundMix = Partial<Record<SoundId, number>>;
 
-/**
- * Local, redistributable audio files served from /public/audio.
- * Every sound above is synthesized in real time, so this list starts empty.
- * See public/audio/README.md for how to add tracks.
- */
+/** Music categories. Tracks themselves live in ./music/library.ts. */
 export const MUSIC_CATEGORIES = [
   'Deep Relaxation',
   'Sleep',
@@ -30,16 +26,3 @@ export const MUSIC_CATEGORIES = [
   'Lo-Fi',
 ] as const;
 export type MusicCategory = (typeof MUSIC_CATEGORIES)[number];
-
-export interface MusicTrack {
-  id: string;
-  /** Track titles are proper names: not translated. */
-  title: string;
-  category: MusicCategory;
-  /** Path relative to the site root, e.g. "audio/slow-tide.mp3". */
-  src: string;
-  /** Who made it and under which license. Required: no unlicensed audio. */
-  credit: string;
-}
-
-export const MUSIC_TRACKS: readonly MusicTrack[] = [];

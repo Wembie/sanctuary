@@ -104,8 +104,37 @@ export const en = {
     section: 'Ambient sounds',
     saved: 'Your mix is remembered on this device.',
     music: 'Music',
-    empty: 'Nothing here yet.',
-    emptyHint: 'Original, freely licensed pieces will live here soon.',
+
+    musicLead: 'Original pieces, composed live as you listen. Never quite the same twice.',
+    musicVolume: 'Music volume',
+    play: (title: string) => `Play ${title}`,
+    stop: (title: string) => `Stop ${title}`,
+    live: 'live',
+    yourTrack: 'Your track',
+    pieces: {
+      'slow-tide': {
+        title: 'Slow Tide',
+        description: 'Wide, warm chords that come and go like water.',
+      },
+      'low-lantern': {
+        title: 'Low Lantern',
+        description: 'Dark and soft. Made for falling asleep.',
+      },
+      'clear-water': {
+        title: 'Clear Water',
+        description: 'A steady, gentle pulse to think inside.',
+      },
+      'stone-bell': { title: 'Stone Bell', description: 'A drone and a singing bowl, far apart.' },
+      'morning-moss': {
+        title: 'Morning Moss',
+        description: 'Bright bells over soft green chords.',
+      },
+      aurora: { title: 'Aurora', description: 'Shimmering, slowly shifting light.' },
+      'rain-tapes': {
+        title: 'Rain Tapes',
+        description: 'Warm keys, a lazy beat, a little tape dust.',
+      },
+    },
     volume: (sound: string) => `${sound} volume`,
     items: {
       rain: { label: 'Rain', description: 'Steady rain on a quiet street' },

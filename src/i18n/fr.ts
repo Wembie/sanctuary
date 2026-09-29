@@ -104,8 +104,41 @@ export const fr: Messages = {
     section: 'Sons d’ambiance',
     saved: 'Votre mélange est conservé sur cet appareil.',
     music: 'Musique',
-    empty: 'Rien ici pour le moment.',
-    emptyHint: 'Des morceaux originaux sous licence libre arriveront bientôt.',
+
+    musicLead:
+      'Des morceaux originaux, composés en direct pendant votre écoute. Jamais deux fois pareils.',
+    musicVolume: 'Volume de la musique',
+    play: (title) => `Lire ${title}`,
+    stop: (title) => `Arrêter ${title}`,
+    live: 'en direct',
+    yourTrack: 'Votre morceau',
+    pieces: {
+      'slow-tide': {
+        title: 'Marée lente',
+        description: 'De larges accords chauds qui vont et viennent comme l’eau.',
+      },
+      'low-lantern': {
+        title: 'Lanterne basse',
+        description: 'Sombre et douce. Faite pour s’endormir.',
+      },
+      'clear-water': {
+        title: 'Eau claire',
+        description: 'Une pulsation stable et douce pour y penser.',
+      },
+      'stone-bell': {
+        title: 'Cloche de pierre',
+        description: 'Un bourdon et un bol chantant, très espacés.',
+      },
+      'morning-moss': {
+        title: 'Mousse du matin',
+        description: 'Des cloches claires sur des accords verts et doux.',
+      },
+      aurora: { title: 'Aurore', description: 'Une lumière scintillante qui change lentement.' },
+      'rain-tapes': {
+        title: 'Cassettes de pluie',
+        description: 'Des touches chaudes, un rythme paresseux, un peu de poussière de bande.',
+      },
+    },
     volume: (sound) => `Volume : ${sound.toLowerCase()}`,
     items: {
       rain: { label: 'Pluie', description: 'Une pluie régulière dans une rue calme' },

@@ -5,7 +5,9 @@ import { useStore } from '../hooks/useStore';
 import { toggleFullscreen } from '../lib/device';
 import { audio } from '../services/audio/AudioManager';
 import { experienceStore } from '../store/experience';
+import { findTrack } from '../services/audio/music/library';
 import { mixStore, toSoundMix } from '../store/mix';
+import { musicStore } from '../store/music';
 import { sceneStore } from '../store/scene';
 import { settingsStore } from '../store/settings';
 import { applyTheme, getEnvironment } from '../themes/environments';
@@ -68,6 +70,10 @@ export function useAudioSync(): void {
     // Silent voices still cost CPU; stop them entirely when sound is off.
     audio.sync(soundEnabled ? toSoundMix(mix) : {});
   }, [mix, soundEnabled]);
+  const { trackId, volume: musicVolume } = useStore(musicStore);
+  useEffect(() => {
+    audio.playMusic(soundEnabled ? findTrack(trackId) : null, musicVolume);
+  }, [trackId, musicVolume, soundEnabled]);
 }
 
 const isTyping = (target: EventTarget | null) =>

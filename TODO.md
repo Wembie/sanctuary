@@ -11,7 +11,7 @@ If it adds pressure (streaks, stats, notifications), it doesn't belong here.
 - [x] **Wake Lock**: keep the screen on during Breathe and Focus (release on pause/leave; graceful when unsupported)
 - [ ] **Media Session**: lock-screen title and play/pause for music; audio keeps playing in the background
 - [ ] **PWA offline**: service worker caching the app shell and assets; installable; PNG icons (192/512, maskable)
-- [ ] **Sessions survive navigation**: a running Focus/Disconnect/Sleep timer keeps going when you change pages
+- [x] **Sessions survive navigation**: a running Focus/Disconnect/Sleep timer keeps going when you change pages
 - [ ] **Music sleep timer**: fade the music out after 15 / 30 / 60 min without entering Sleep mode
 - [x] **Fix sticky hover on touch**: wrap hover styles in `@media (hover: hover)`
 

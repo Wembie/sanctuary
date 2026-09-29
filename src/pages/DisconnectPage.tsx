@@ -8,7 +8,6 @@ import { useImmersive } from '../hooks/useScene';
 import { useT } from '../i18n';
 import { useSession } from '../hooks/useSession';
 import { minutes } from '../lib/timer';
-import { audio } from '../services/audio/AudioManager';
 import styles from './Page.module.css';
 
 const PRESETS: readonly DurationChoice[] = [5, 10, 20, 30];
@@ -20,8 +19,8 @@ export default function DisconnectPage() {
   const reduced = useReducedMotion();
   const [line, setLine] = useState(0);
   const [choice, setChoice] = useState<DurationChoice>(10);
-  const session = useSession(() => audio.playChime());
-  const active = session.status === 'running' || session.status === 'paused';
+  const session = useSession('disconnect');
+  const { active } = session;
   const lineCount = lines.length;
   const ready = reduced || line >= lineCount - 1;
   useImmersive(active);

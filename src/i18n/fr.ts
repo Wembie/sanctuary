@@ -239,6 +239,11 @@ export const fr: Messages = {
     madeBy: 'Créé par',
   },
 
+  session: {
+    backTo: (label, clock) =>
+      clock ? `Revenir à ${label}, encore ${clock}` : `Revenir à ${label}`,
+  },
+
   error: {
     message: 'Ce coin du sanctuaire se repose.',
     home: 'Revenir à l’accueil',

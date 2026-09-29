@@ -232,6 +232,11 @@ export const en = {
     madeBy: 'Made by',
   },
 
+  session: {
+    backTo: (label: string, clock: string | null) =>
+      clock ? `Back to ${label}, ${clock} left` : `Back to ${label}`,
+  },
+
   error: {
     message: 'This corner of the sanctuary is resting.',
     home: 'Return home',

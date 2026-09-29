@@ -233,6 +233,11 @@ export const pt: Messages = {
     madeBy: 'Feito por',
   },
 
+  session: {
+    backTo: (label, clock) =>
+      clock ? `Voltar para ${label}, faltam ${clock}` : `Voltar para ${label}`,
+  },
+
   error: {
     message: 'Este canto do santuário está descansando.',
     home: 'Voltar ao início',

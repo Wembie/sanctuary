@@ -236,6 +236,10 @@ export const es: Messages = {
     madeBy: 'Hecho por',
   },
 
+  session: {
+    backTo: (label, clock) => (clock ? `Volver a ${label}, quedan ${clock}` : `Volver a ${label}`),
+  },
+
   error: {
     message: 'Este rincón del santuario está descansando.',
     home: 'Volver al inicio',

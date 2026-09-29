@@ -40,6 +40,10 @@ src/
                 wakeLock (ScreenWakeLock, injectable for tests)
     ambient/    AmbientEngine: the canvas particle system
   pages/        One lazy chunk per route
+  services/session.ts
+                The one global timed session (focus | sleep | disconnect); pages use
+                useSession(kind); side effects (chime, wake lock, sleep fade) in
+                app/useSessionEffects.ts
   services/audio/
                 AudioManager.ts (single AudioContext), generators.ts (8 ambient sounds),
                 synthesis.ts (VoiceGraph, noise), mix.ts (planMix), catalog.ts

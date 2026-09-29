@@ -7,10 +7,8 @@ import { FadeText } from '../components/ui/FadeText';
 import { useImmersive } from '../hooks/useScene';
 import { useSession } from '../hooks/useSession';
 import { useStore } from '../hooks/useStore';
-import { useWakeLock } from '../hooks/useWakeLock';
 import { useT } from '../i18n';
 import { formatClock, minutes, remainingMs, sessionProgress } from '../lib/timer';
-import { audio } from '../services/audio/AudioManager';
 import { experienceStore } from '../store/experience';
 import styles from './Page.module.css';
 
@@ -19,11 +17,9 @@ const PRESETS = [25, 45, 60] as const;
 export default function FocusPage() {
   const t = useT();
   const focusMinutes = useStore(experienceStore, (s) => s.focusMinutes);
-  const session = useSession(() => audio.playChime());
-  const active = session.status === 'running' || session.status === 'paused';
+  const session = useSession('focus');
+  const { active } = session;
   useImmersive(active);
-  // The clock should stay visible for the whole session; paused sessions let the screen rest.
-  useWakeLock(session.status === 'running');
 
   if (session.status === 'complete') {
     return (

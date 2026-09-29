@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DurationPicker, type DurationChoice } from '../components/session/DurationPicker';
 import { SessionControls } from '../components/session/SessionControls';
 import { FadeText } from '../components/ui/FadeText';
-import { useImmersive, useSceneIntensityReset } from '../hooks/useScene';
+import { useImmersive } from '../hooks/useScene';
 import { useSession } from '../hooks/useSession';
 import { useT } from '../i18n';
 import { minutes } from '../lib/timer';
-import { sleepFade } from '../lib/sleep';
-import { audio } from '../services/audio/AudioManager';
-import { sceneStore } from '../store/scene';
 import styles from './Page.module.css';
 import local from './SleepPage.module.css';
 
@@ -17,33 +14,12 @@ const PRESETS: readonly DurationChoice[] = [15, 30, 60, 90, null];
 export default function SleepPage() {
   const t = useT();
   const [choice, setChoice] = useState<DurationChoice>(30);
-  const session = useSession();
-  const active = session.status === 'running' || session.status === 'paused';
+  const session = useSession('sleep');
+  const { active } = session;
   useImmersive(active || session.status === 'complete');
-  useSceneIntensityReset();
 
-  // The whole world dims with the session: light first, sound only at the end.
-  useEffect(() => {
-    if (session.status === 'idle') return;
-    const { intensity, volume } = sleepFade(session.elapsed, session.duration);
-    const rounded = Math.round(intensity * 100) / 100;
-    if (sceneStore.get().intensity !== rounded) sceneStore.set({ intensity: rounded });
-    audio.setMasterScale(volume, 3);
-  }, [session.elapsed, session.duration, session.status]);
-
-  // Leaving sleep brings the light and sound back slowly.
-  useEffect(
-    () => () => {
-      audio.setMasterScale(1, 4);
-    },
-    [],
-  );
-
-  const wake = () => {
-    sceneStore.set({ intensity: 1 });
-    audio.setMasterScale(1, 4);
-    session.reset();
-  };
+  // Light and sound come back slowly (see useSleepFade); the session simply ends.
+  const wake = session.reset;
 
   if (session.status === 'complete') {
     return (

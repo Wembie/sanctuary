@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { Stopwatch } from '../lib/timer';
+import { useEffect } from 'react';
+import { isActive, session, type SessionKind, type SessionStatus } from '../services/session';
+import { useStore } from './useStore';
 
-export type SessionStatus = 'idle' | 'running' | 'paused' | 'complete';
-
-export interface Session {
+export interface SessionView {
   status: SessionStatus;
   elapsed: number;
-  /** null for open-ended sessions. */
   duration: number | null;
+  active: boolean;
   start: (duration: number | null) => void;
   pause: () => void;
   resume: () => void;
@@ -16,64 +15,32 @@ export interface Session {
 }
 
 /**
- * A timed session that ticks four times a second: enough for a clock that
- * shows seconds, cheap enough to leave running for an hour.
+ * A page's view of the global session. If another kind of session is running,
+ * this page sees "idle" (starting one here replaces the other).
+ * A finished session is cleared when you leave its page, so coming back starts fresh.
  */
-export function useSession(onComplete?: () => void): Session {
-  const watch = useRef(new Stopwatch());
-  const [status, setStatus] = useState<SessionStatus>('idle');
-  const [elapsed, setElapsed] = useState(0);
-  const [duration, setDuration] = useState<number | null>(null);
-  const completeRef = useRef(onComplete);
-  useEffect(() => {
-    completeRef.current = onComplete;
-  });
+export function useSession(kind: SessionKind): SessionView {
+  const state = useStore(session.store);
+  const mine = state.kind === kind;
+  const status: SessionStatus = mine ? state.status : 'idle';
 
-  useEffect(() => {
-    if (status !== 'running') return;
-    const tick = () => {
-      const now = watch.current.elapsed();
-      setElapsed(now);
-      if (duration !== null && now >= duration) {
-        watch.current.pause();
-        setStatus('complete');
-        completeRef.current?.();
-      }
-    };
-    tick();
-    const id = window.setInterval(tick, 250);
-    return () => window.clearInterval(id);
-  }, [status, duration]);
+  useEffect(
+    () => () => {
+      const now = session.store.get();
+      if (now.kind === kind && now.status === 'complete') session.reset();
+    },
+    [kind],
+  );
 
-  const start = useCallback((next: number | null) => {
-    watch.current.reset();
-    watch.current.start();
-    setDuration(next);
-    setElapsed(0);
-    setStatus('running');
-  }, []);
-
-  const pause = useCallback(() => {
-    watch.current.pause();
-    setStatus((s) => (s === 'running' ? 'paused' : s));
-  }, []);
-
-  const resume = useCallback(() => {
-    watch.current.start();
-    setStatus((s) => (s === 'paused' ? 'running' : s));
-  }, []);
-
-  const end = useCallback(() => {
-    watch.current.pause();
-    setElapsed(watch.current.elapsed());
-    setStatus('complete');
-  }, []);
-
-  const reset = useCallback(() => {
-    watch.current.reset();
-    setElapsed(0);
-    setStatus('idle');
-  }, []);
-
-  return { status, elapsed, duration, start, pause, resume, end, reset };
+  return {
+    status,
+    elapsed: mine ? state.elapsed : 0,
+    duration: mine ? state.duration : null,
+    active: mine && isActive(state),
+    start: (duration) => session.start(kind, duration),
+    pause: session.pause,
+    resume: session.resume,
+    end: session.end,
+    reset: session.reset,
+  };
 }

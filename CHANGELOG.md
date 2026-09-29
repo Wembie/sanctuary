@@ -13,6 +13,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - **Screen stays awake** while breathing or during a running Focus session (Screen Wake Lock
   API). Released on pause, when leaving the page or ending the session, re-acquired when the tab
   becomes visible again; silently skipped where unsupported.
+- **Sessions keep going while you move around**: Focus, Sleep and Disconnect run in one global
+  session; a small chip above the navigation shows it (with time left) and leads back to it.
+  Sleep keeps dimming wherever you are. Starting a new session replaces the previous one.
 
 ### Changed
 

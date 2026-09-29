@@ -5,6 +5,7 @@ import { Stillness } from '../components/experiences/Stillness';
 import { Loader } from '../components/intro/Loader';
 import { Threshold } from '../components/intro/Threshold';
 import { FloatingNavigation } from '../components/navigation/FloatingNavigation';
+import { SessionIndicator } from '../components/session/SessionIndicator';
 import { SettingsPanel } from '../components/settings/SettingsPanel';
 import { useHashRoute } from '../hooks/useHashRoute';
 import { useStore } from '../hooks/useStore';
@@ -19,6 +20,7 @@ import {
   useKeyboardShortcuts,
 } from './useAppEffects';
 import { ErrorBoundary } from './ErrorBoundary';
+import { useSessionEffects } from './useSessionEffects';
 import styles from './App.module.css';
 
 type Stage = 'loading' | 'threshold' | 'entered';
@@ -37,6 +39,7 @@ export function App() {
   useAudioSync();
   useDocumentState(route, entered);
   useKeyboardShortcuts(entered);
+  useSessionEffects();
 
   const onLoaded = useCallback(() => setStage('threshold'), []);
   const onEnter = useCallback(() => {
@@ -84,6 +87,7 @@ function Sanctuary({ route }: { route: ReturnType<typeof useHashRoute>[0] }) {
           </Suspense>
         </ErrorBoundary>
       </main>
+      <SessionIndicator route={route} />
       <FloatingNavigation route={route} />
       <SettingsPanel />
       {stillness && <Stillness />}

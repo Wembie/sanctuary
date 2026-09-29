@@ -1,10 +1,10 @@
-import type { Session } from '../../hooks/useSession';
+import type { SessionView } from '../../hooks/useSession';
 import { useT } from '../../i18n';
 import { Icon } from '../ui/Icon';
 import styles from './Session.module.css';
 
 interface SessionControlsProps {
-  session: Session;
+  session: SessionView;
   /** Defaults to the translated "End". */
   endLabel?: string;
   pausable?: boolean;

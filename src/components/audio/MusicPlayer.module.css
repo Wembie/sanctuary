@@ -52,9 +52,11 @@
     transform var(--dur-fast) var(--ease-calm);
 }
 
-.track:hover {
-  background: var(--surface);
-  border-color: var(--border);
+@media (hover: hover) {
+  .track:hover {
+    background: var(--surface);
+    border-color: var(--border);
+  }
 }
 
 .track:active {
@@ -154,4 +156,29 @@
 :root[data-motion='reduced'] .wave i {
   animation: none !important;
   transform: scaleY(0.6);
+}
+
+.timer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  animation: timer-in var(--dur-slow) var(--ease-soft-out) backwards;
+}
+
+.timerLabel {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.timerLeft {
+  font-size: var(--text-micro);
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes timer-in {
+  from {
+    opacity: 0;
+  }
 }

@@ -50,16 +50,28 @@
     transform var(--dur-slow) var(--ease-soft-out);
 }
 
-.need:hover,
 .need:focus-visible {
   background: radial-gradient(ellipse at 50% 100%, rgb(var(--glow-rgb) / 0.14), transparent 70%);
   transform: scale(1.02);
 }
 
-.need:hover::after,
+@media (hover: hover) {
+  .need:hover {
+    background: radial-gradient(ellipse at 50% 100%, rgb(var(--glow-rgb) / 0.14), transparent 70%);
+    transform: scale(1.02);
+  }
+}
+
 .need:focus-visible::after {
   opacity: 1;
   transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .need:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 .need:active {
@@ -73,14 +85,17 @@
 }
 
 .needHint {
+  text-wrap: balance;
   font-size: var(--text-micro);
   color: var(--text-faint);
   letter-spacing: 0.04em;
   transition: color var(--dur-base) var(--ease-calm);
 }
 
-.need:hover .needHint {
-  color: var(--text-secondary);
+@media (hover: hover) {
+  .need:hover .needHint {
+    color: var(--text-secondary);
+  }
 }
 
 .stay {
@@ -96,9 +111,11 @@
     text-shadow var(--dur-base) var(--ease-calm);
 }
 
-.stay:hover {
-  color: var(--text-primary);
-  text-shadow: 0 0 24px rgb(var(--glow-rgb) / 0.8);
+@media (hover: hover) {
+  .stay:hover {
+    color: var(--text-primary);
+    text-shadow: 0 0 24px rgb(var(--glow-rgb) / 0.8);
+  }
 }
 
 .extras {
@@ -118,6 +135,8 @@
   transition: color var(--dur-base) var(--ease-calm);
 }
 
-.extra:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .extra:hover {
+    color: var(--text-primary);
+  }
 }

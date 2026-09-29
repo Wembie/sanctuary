@@ -5,18 +5,39 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
-### Planned for v0.3 — Immersion
+Planned work lives in [`TODO.md`](TODO.md).
 
-- Audio-reactive visualizer (blobs and waves, never an equalizer)
-- Richer environment visuals (caustics, glass droplets, abstract trees)
+## [0.3.0] — 2026-09-29
 
-### Planned for v0.4 — Experiences
+Night-ready on mobile.
 
-- Calm Canvas, Floating Bubbles, Grow, Zen Garden
+### Added
 
-### Planned for v0.5 — Polish
+- `CLAUDE.md`: project guide for AI-assisted development (architecture, conventions, how-tos,
+  release flow, gotchas).
+- `TODO.md`: the roadmap as a checklist, ordered by version.
+- **Screen stays awake** while breathing or during a running Focus session (Screen Wake Lock
+  API). Released on pause, when leaving the page or ending the session, re-acquired when the tab
+  becomes visible again; silently skipped where unsupported.
+- **Sessions keep going while you move around**: Focus, Sleep and Disconnect run in one global
+  session; a small chip above the navigation shows it (with time left) and leads back to it.
+  Sleep keeps dimming wherever you are. Starting a new session replaces the previous one.
+- **Music timer**: "Stop music after 15 / 30 / 60 min" in the Music section, with a quiet
+  countdown; the music then fades out over 20 seconds. Stopping the music cancels it.
+- **Works offline and installs like an app** (PWA): a build-generated service worker precaches
+  the app; new versions take over once the old one is closed. PNG and maskable icons, an
+  Apple touch icon, and a richer web manifest. Music files stay online-only.
+- **Lock-screen controls and background audio** (Media Session): shows the piece or place that is
+  playing with artwork; play/pause map to the sound switch. Audio is routed through a media element
+  so phones keep it playing with the screen locked; if that isn't possible, output stays direct.
+  Pausing from outside (headphones unplugged) turns sound off in the app too.
 
-- Time-aware palettes, easter eggs, offline caching (PWA service worker)
+### Changed
+
+- Hover effects only apply on devices that can hover: no more buttons stuck "highlighted"
+  after a tap on phones and tablets. Keyboard focus styles are unchanged.
+- Home: the Sleep hint now says what actually happens ("Let the screen fade to dark") instead
+  of "Let the room go dark", which read as if it controlled the lights. All four languages.
 
 ## [0.2.1] — 2026-09-29
 

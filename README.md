@@ -207,7 +207,8 @@ beside it sets the title and credit. Only add audio you may redistribute. See
 ## Browser support
 
 Current Chrome, Edge, Firefox, Safari, iOS Safari and Chrome Android. Missing features degrade:
-no `backdrop-filter` → opaque glass; no Web Audio → silent; no Fullscreen API → option hidden;
+no `backdrop-filter` → opaque glass; no Screen Wake Lock → the screen may sleep during a session; no Media Session or
+MediaStream output → no lock-screen controls, audio plays directly; no Web Audio → silent; no Fullscreen API → option hidden;
 no `@property` → colors switch instead of crossfading.
 
 ## Contributing

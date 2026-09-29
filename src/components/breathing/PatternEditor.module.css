@@ -43,9 +43,11 @@
     background var(--dur-fast) var(--ease-calm);
 }
 
-.stepper button:hover:not(:disabled) {
-  color: var(--text-primary);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .stepper button:hover:not(:disabled) {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
 }
 
 .stepper button:disabled {

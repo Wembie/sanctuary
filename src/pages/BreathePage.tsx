@@ -5,6 +5,7 @@ import { FadeText } from '../components/ui/FadeText';
 import { Segmented } from '../components/ui/Segmented';
 import { useReducedMotion } from '../hooks/usePreferences';
 import { useStore } from '../hooks/useStore';
+import { useWakeLock } from '../hooks/useWakeLock';
 import { useT } from '../i18n';
 import { TECHNIQUES, type TechniqueId } from '../lib/breathing';
 import { experienceStore } from '../store/experience';
@@ -23,6 +24,8 @@ export default function BreathePage() {
   const [paused, setPaused] = useState(false);
   const pattern = technique === 'custom' ? customPattern : TECHNIQUES[technique].pattern;
   const running = settled && !paused;
+  // Eyes on the orb, not on the phone's timeout: keep the screen on while breathing.
+  useWakeLock(running);
   const options = TECHNIQUE_IDS.map((id) => ({ value: id, label: t.breathe.techniques[id].label }));
 
   // A few seconds to arrive before the first breath.

@@ -32,8 +32,10 @@
     box-shadow var(--dur-slow) var(--ease-calm);
 }
 
-.tile:hover {
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .tile:hover {
+    background: var(--surface-hover);
+  }
 }
 
 .tile[data-on] {

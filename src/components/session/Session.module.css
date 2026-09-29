@@ -135,13 +135,83 @@
   letter-spacing: 0.04em;
 }
 
-.control:hover,
-.endButton:hover {
-  color: var(--text-primary);
-  background: var(--surface-hover);
+@media (hover: hover) {
+  .control:hover,
+  .endButton:hover {
+    color: var(--text-primary);
+    background: var(--surface-hover);
+  }
 }
 
 .control:active,
 .endButton:active {
   transform: scale(0.96);
+}
+
+/* ---------- Indicator: a session still running elsewhere ---------- */
+
+.indicator {
+  position: fixed;
+  z-index: 19;
+  left: 50%;
+  bottom: calc(var(--safe-bottom) + var(--nav-height) + var(--space-5));
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  animation: indicator-in var(--dur-slow) var(--ease-soft-out) backwards;
+  transition:
+    color var(--dur-base) var(--ease-calm),
+    opacity var(--dur-slow) var(--ease-calm);
+}
+
+@media (hover: hover) {
+  .indicator:hover {
+    color: var(--text-primary);
+  }
+}
+
+@keyframes indicator-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+}
+
+.indicatorClock {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-faint);
+}
+
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--accent-rgb) / 0.9);
+  box-shadow: 0 0 8px rgb(var(--glow-rgb) / 0.9);
+  animation: pulse 4s var(--ease-calm) infinite;
+}
+
+.pulse[data-paused] {
+  animation: none;
+  opacity: 0.4;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+:root[data-motion='reduced'] .pulse {
+  animation: none;
 }

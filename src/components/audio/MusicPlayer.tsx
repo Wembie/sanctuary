@@ -1,22 +1,14 @@
 import { setSoundEnabled } from '../../app/actions';
 import { useStore } from '../../hooks/useStore';
-import { useT, type Messages } from '../../i18n';
+import { useT } from '../../i18n';
 import { ALL_TRACKS, type MusicTrack } from '../../services/audio/music/library';
+import { trackText } from '../../services/audio/music/trackText';
 import { musicStore } from '../../store/music';
 import { settingsStore } from '../../store/settings';
 import { Icon } from '../ui/Icon';
 import { Slider } from '../ui/Slider';
+import { MusicTimer } from './MusicTimer';
 import styles from './MusicPlayer.module.css';
-
-type PieceId = keyof Messages['sounds']['pieces'];
-
-function trackText(t: Messages, track: MusicTrack): { title: string; detail: string } {
-  if (track.kind === 'file') {
-    return { title: track.title, detail: track.credit ?? t.sounds.yourTrack };
-  }
-  const piece = t.sounds.pieces[track.id as PieceId];
-  return { title: piece?.title ?? track.id, detail: piece?.description ?? '' };
-}
 
 /** One track at a time. Tapping the playing one stops it. */
 export function MusicPlayer() {
@@ -40,6 +32,8 @@ export function MusicPlayer() {
           onChange={(value) => musicStore.set({ volume: value })}
         />
       </div>
+
+      {trackId !== null && <MusicTimer />}
 
       <ul className={styles.list}>
         {ALL_TRACKS.map((track) => {

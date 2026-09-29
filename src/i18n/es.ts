@@ -60,7 +60,7 @@ export const es: Messages = {
     needs: {
       calm: { label: 'Calma', hint: 'Respira despacio' },
       focus: { label: 'Enfoque', hint: 'Trabaja sin presión' },
-      sleep: { label: 'Dormir', hint: 'Deja que la habitación se oscurezca' },
+      sleep: { label: 'Dormir', hint: 'Deja que la pantalla se apague poco a poco' },
       disconnect: { label: 'Desconectar', hint: 'Aléjate un rato' },
     },
     stay: 'O simplemente quédate.',
@@ -108,6 +108,9 @@ export const es: Messages = {
     musicLead:
       'Piezas originales que se componen en vivo mientras escuchas. Nunca suenan igual dos veces.',
     musicVolume: 'Volumen de la música',
+    timerLabel: 'Apagar la música en',
+    timerOff: 'No',
+    stopsIn: (min) => (min <= 1 ? 'Se apaga en un minuto' : `Se apaga en ${min} min`),
     play: (title) => `Reproducir ${title}`,
     stop: (title) => `Detener ${title}`,
     live: 'en vivo',
@@ -234,6 +237,10 @@ export const es: Messages = {
     fullscreen: 'Pantalla completa',
     privacy: 'Tus preferencias se quedan en este dispositivo. No se envía nada.',
     madeBy: 'Hecho por',
+  },
+
+  session: {
+    backTo: (label, clock) => (clock ? `Volver a ${label}, quedan ${clock}` : `Volver a ${label}`),
   },
 
   error: {

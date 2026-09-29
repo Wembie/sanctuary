@@ -63,7 +63,7 @@ export const en = {
     needs: {
       calm: { label: 'Calm', hint: 'Breathe slowly' },
       focus: { label: 'Focus', hint: 'Work without pressure' },
-      sleep: { label: 'Sleep', hint: 'Let the room go dark' },
+      sleep: { label: 'Sleep', hint: 'Let the screen fade to dark' },
       disconnect: { label: 'Disconnect', hint: 'Be away for a while' },
     },
     stay: 'Or simply stay.',
@@ -107,6 +107,9 @@ export const en = {
 
     musicLead: 'Original pieces, composed live as you listen. Never quite the same twice.',
     musicVolume: 'Music volume',
+    timerLabel: 'Stop music after',
+    timerOff: 'Off',
+    stopsIn: (min: number) => (min <= 1 ? 'Stops in about a minute' : `Stops in ${min} min`),
     play: (title: string) => `Play ${title}`,
     stop: (title: string) => `Stop ${title}`,
     live: 'live',
@@ -230,6 +233,11 @@ export const en = {
     fullscreen: 'Fullscreen',
     privacy: 'Preferences stay on this device. Nothing is sent anywhere.',
     madeBy: 'Made by',
+  },
+
+  session: {
+    backTo: (label: string, clock: string | null) =>
+      clock ? `Back to ${label}, ${clock} left` : `Back to ${label}`,
   },
 
   error: {

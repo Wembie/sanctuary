@@ -8,6 +8,7 @@ import { experienceStore } from '../store/experience';
 import { findTrack } from '../services/audio/music/library';
 import { mixStore, toSoundMix } from '../store/mix';
 import { musicStore } from '../store/music';
+import { MUSIC_TIMER_FADE_SECONDS, musicTimerStore, setMusicTimer } from '../store/musicTimer';
 import { sceneStore } from '../store/scene';
 import { settingsStore } from '../store/settings';
 import { applyTheme, getEnvironment } from '../themes/environments';
@@ -74,6 +75,34 @@ export function useAudioSync(): void {
   useEffect(() => {
     audio.playMusic(soundEnabled ? findTrack(trackId) : null, musicVolume);
   }, [trackId, musicVolume, soundEnabled]);
+}
+
+/** Stops the music with a long fade when the music timer runs out. */
+export function useMusicTimer(): void {
+  const endsAt = useStore(musicTimerStore, (s) => s.endsAt);
+  const trackId = useStore(musicStore, (s) => s.trackId);
+
+  // Stopping the music by hand also cancels its timer.
+  useEffect(() => {
+    if (trackId === null && musicTimerStore.get().endsAt !== null) setMusicTimer(null);
+  }, [trackId]);
+
+  useEffect(() => {
+    if (endsAt === null) return;
+    const fire = () => {
+      // Fade first; the store change right after is then a no-op for the audio engine.
+      audio.playMusic(null, 0, MUSIC_TIMER_FADE_SECONDS);
+      setMusicTimer(null);
+      musicStore.set({ trackId: null });
+    };
+    const delay = endsAt - Date.now();
+    if (delay <= 0) {
+      fire();
+      return;
+    }
+    const id = window.setTimeout(fire, delay);
+    return () => window.clearTimeout(id);
+  }, [endsAt]);
 }
 
 const isTyping = (target: EventTarget | null) =>

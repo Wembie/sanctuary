@@ -12,6 +12,7 @@ Planned work lives in [`TODO.md`](TODO.md).
 ### Added
 
 - `sitemap.xml` for search engines (submit it in Google Search Console).
+- Google Search Console verification file.
 
 ### Fixed
 

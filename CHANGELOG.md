@@ -16,6 +16,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - **Sessions keep going while you move around**: Focus, Sleep and Disconnect run in one global
   session; a small chip above the navigation shows it (with time left) and leads back to it.
   Sleep keeps dimming wherever you are. Starting a new session replaces the previous one.
+- **Music timer**: "Stop music after 15 / 30 / 60 min" in the Music section, with a quiet
+  countdown; the music then fades out over 20 seconds. Stopping the music cancels it.
 
 ### Changed
 

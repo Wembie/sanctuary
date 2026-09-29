@@ -108,6 +108,9 @@ export const fr: Messages = {
     musicLead:
       'Des morceaux originaux, composés en direct pendant votre écoute. Jamais deux fois pareils.',
     musicVolume: 'Volume de la musique',
+    timerLabel: 'Arrêter la musique dans',
+    timerOff: 'Non',
+    stopsIn: (min) => (min <= 1 ? 'S’arrête dans une minute' : `S’arrête dans ${min} min`),
     play: (title) => `Lire ${title}`,
     stop: (title) => `Arrêter ${title}`,
     live: 'en direct',

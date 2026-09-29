@@ -6,6 +6,7 @@ import { musicStore } from '../../store/music';
 import { settingsStore } from '../../store/settings';
 import { Icon } from '../ui/Icon';
 import { Slider } from '../ui/Slider';
+import { MusicTimer } from './MusicTimer';
 import styles from './MusicPlayer.module.css';
 
 type PieceId = keyof Messages['sounds']['pieces'];
@@ -40,6 +41,8 @@ export function MusicPlayer() {
           onChange={(value) => musicStore.set({ volume: value })}
         />
       </div>
+
+      {trackId !== null && <MusicTimer />}
 
       <ul className={styles.list}>
         {ALL_TRACKS.map((track) => {

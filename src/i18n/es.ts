@@ -108,6 +108,9 @@ export const es: Messages = {
     musicLead:
       'Piezas originales que se componen en vivo mientras escuchas. Nunca suenan igual dos veces.',
     musicVolume: 'Volumen de la música',
+    timerLabel: 'Apagar la música en',
+    timerOff: 'No',
+    stopsIn: (min) => (min <= 1 ? 'Se apaga en un minuto' : `Se apaga en ${min} min`),
     play: (title) => `Reproducir ${title}`,
     stop: (title) => `Detener ${title}`,
     live: 'en vivo',

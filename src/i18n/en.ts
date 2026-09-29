@@ -107,6 +107,9 @@ export const en = {
 
     musicLead: 'Original pieces, composed live as you listen. Never quite the same twice.',
     musicVolume: 'Music volume',
+    timerLabel: 'Stop music after',
+    timerOff: 'Off',
+    stopsIn: (min: number) => (min <= 1 ? 'Stops in about a minute' : `Stops in ${min} min`),
     play: (title: string) => `Play ${title}`,
     stop: (title: string) => `Stop ${title}`,
     live: 'live',

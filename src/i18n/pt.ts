@@ -105,6 +105,9 @@ export const pt: Messages = {
     musicLead:
       'Peças originais compostas ao vivo enquanto você ouve. Nunca soam iguais duas vezes.',
     musicVolume: 'Volume da música',
+    timerLabel: 'Desligar a música em',
+    timerOff: 'Não',
+    stopsIn: (min) => (min <= 1 ? 'Desliga em um minuto' : `Desliga em ${min} min`),
     play: (title) => `Tocar ${title}`,
     stop: (title) => `Parar ${title}`,
     live: 'ao vivo',

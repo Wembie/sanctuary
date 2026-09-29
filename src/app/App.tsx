@@ -15,6 +15,7 @@ import { sceneStore } from '../store/scene';
 import { PAGES, preloadPage } from './pages';
 import {
   useAudioSync,
+  useMusicTimer,
   useDocumentState,
   useEnvironmentTheme,
   useKeyboardShortcuts,
@@ -37,6 +38,7 @@ export function App() {
 
   useEnvironmentTheme();
   useAudioSync();
+  useMusicTimer();
   useDocumentState(route, entered);
   useKeyboardShortcuts(entered);
   useSessionEffects();

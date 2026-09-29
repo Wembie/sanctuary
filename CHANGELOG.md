@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Added
+
+- `CLAUDE.md`: project guide for AI-assisted development (architecture, conventions, how-tos,
+  release flow, gotchas).
+
 ### Planned for v0.3 — Immersion
 
 - Audio-reactive visualizer (blobs and waves, never an equalizer)

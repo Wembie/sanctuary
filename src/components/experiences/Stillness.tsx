@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useT } from '../../i18n';
 import { sceneSignals, sceneStore } from '../../store/scene';
 import styles from './Stillness.module.css';
 
@@ -6,19 +7,22 @@ import styles from './Stillness.module.css';
  * "Do nothing" mode. One sentence, then the interface leaves entirely.
  * Much later, a second sentence. Then only the place remains.
  */
-const SCRIPT: { at: number; text: string | null }[] = [
-  { at: 0, text: 'You don’t have to do anything.' },
-  { at: 6000, text: null },
-  { at: 40_000, text: 'Just stay.' },
-  { at: 46_000, text: null },
+type Line = 'first' | 'second' | null;
+const SCRIPT: { at: number; line: Line }[] = [
+  { at: 0, line: 'first' },
+  { at: 6000, line: null },
+  { at: 40_000, line: 'second' },
+  { at: 46_000, line: null },
 ];
 
 export function Stillness() {
-  const [text, setText] = useState<string | null>(null);
+  const t = useT();
+  const [line, setLine] = useState<Line>(null);
+  const text = line ? t.stillness[line] : null;
 
   useEffect(() => {
-    const timers = SCRIPT.map(({ at, text: line }) =>
-      window.setTimeout(() => setText(line), at + 400),
+    const timers = SCRIPT.map(({ at, line: next }) =>
+      window.setTimeout(() => setLine(next), at + 400),
     );
     // A very slow visual breath in the particles, with no orb to watch.
     let raf = 0;
@@ -53,7 +57,7 @@ export function Stillness() {
         className={`${styles.return} chrome`}
         onClick={() => sceneStore.set({ stillness: false })}
       >
-        Return
+        {t.common.returnLabel}
       </button>
     </div>
   );

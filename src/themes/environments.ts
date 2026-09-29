@@ -20,9 +20,6 @@ export interface Palette {
 
 export interface Environment {
   id: EnvironmentId;
-  name: string;
-  /** One quiet line: what it feels like to be there. */
-  line: string;
   palette: Palette;
   particles: { kind: ParticleKind; density: number };
   /** 0 – 1: how visible the slow aurora layer is. */
@@ -33,8 +30,6 @@ export interface Environment {
 export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   night: {
     id: 'night',
-    name: 'Night',
-    line: 'Stars, a slow aurora, and nothing else.',
     palette: {
       bgTop: '#04060d',
       bgBottom: '#0a0f22',
@@ -51,8 +46,6 @@ export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   },
   ocean: {
     id: 'ocean',
-    name: 'Ocean',
-    line: 'Deep water. Light from far above.',
     palette: {
       bgTop: '#03121c',
       bgBottom: '#020912',
@@ -69,8 +62,6 @@ export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   },
   forest: {
     id: 'forest',
-    name: 'Forest',
-    line: 'Mist between the trees. Warm, late light.',
     palette: {
       bgTop: '#050a07',
       bgBottom: '#0d1811',
@@ -87,8 +78,6 @@ export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   },
   rain: {
     id: 'rain',
-    name: 'Rain',
-    line: 'A window, a city somewhere behind it.',
     palette: {
       bgTop: '#07090d',
       bgBottom: '#111721',
@@ -105,8 +94,6 @@ export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   },
   fire: {
     id: 'fire',
-    name: 'Fireplace',
-    line: 'Embers rising into a dark, warm room.',
     palette: {
       bgTop: '#080403',
       bgBottom: '#170a06',
@@ -123,8 +110,6 @@ export const ENVIRONMENTS: Record<EnvironmentId, Environment> = {
   },
   clouds: {
     id: 'clouds',
-    name: 'Clouds',
-    line: 'Dusk sky. Clouds with nowhere to be.',
     palette: {
       bgTop: '#1a2036',
       bgBottom: '#3f4462',

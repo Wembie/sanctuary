@@ -8,6 +8,7 @@ import { FloatingNavigation } from '../components/navigation/FloatingNavigation'
 import { SettingsPanel } from '../components/settings/SettingsPanel';
 import { useHashRoute } from '../hooks/useHashRoute';
 import { useStore } from '../hooks/useStore';
+import { useT } from '../i18n';
 import { experienceStore } from '../store/experience';
 import { sceneStore } from '../store/scene';
 import { PAGES, preloadPage } from './pages';
@@ -55,6 +56,7 @@ export function App() {
 }
 
 function Sanctuary({ route }: { route: ReturnType<typeof useHashRoute>[0] }) {
+  const t = useT();
   const stillness = useStore(sceneStore, (s) => s.stillness);
   const Page = PAGES[route];
 
@@ -65,7 +67,7 @@ function Sanctuary({ route }: { route: ReturnType<typeof useHashRoute>[0] }) {
         className="skip-link"
         onClick={() => document.getElementById('main')?.focus()}
       >
-        Skip to content
+        {t.common.skipToContent}
       </button>
       <main
         id="main"

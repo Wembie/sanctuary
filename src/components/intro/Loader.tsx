@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useT } from '../../i18n';
 import styles from './Intro.module.css';
 
 interface LoaderProps {
@@ -12,6 +13,7 @@ const EXIT_MS = 900;
 
 /** Never "Loading...": a small sphere breathing while the space gets ready. */
 export function Loader({ ready, onDone }: LoaderProps) {
+  const t = useT();
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export function Loader({ ready, onDone }: LoaderProps) {
   return (
     <div className={styles.loader} data-leaving={leaving || undefined} role="status">
       <div className={styles.loaderOrb} aria-hidden="true" />
-      <p className={styles.loaderText}>preparing your space…</p>
+      <p className={styles.loaderText}>{t.loader.preparing}</p>
     </div>
   );
 }

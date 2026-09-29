@@ -69,6 +69,7 @@ src/
 │   ├── settings/        SettingsPanel
 │   └── ui/              Icon, Slider, Switch, Segmented, Modal, FadeText
 ├── hooks/               useStore, useHashRoute, useIdle, useSession, useAnimationFrame, …
+├── i18n/                Typed dictionaries (en, es, pt, fr), detection, useT()
 ├── lib/                 Pure logic: breathing, timer, sleep curve, random, storage, store
 │   └── ambient/         AmbientEngine (canvas particle system)
 ├── pages/               One lazy-loaded chunk per route
@@ -77,6 +78,16 @@ src/
 ├── styles/              tokens.css (design system), global.css
 └── themes/              Environments: palettes, particle presets, soundscapes
 ```
+
+**Languages.** English, Español, Português, Français. No i18n library: each locale is a plain
+object typed as `Messages` (the shape of `src/i18n/en.ts`), so a missing or extra key fails
+`tsc`. Strings whose grammar depends on values are small functions. `useT()` returns the current
+dictionary; the language comes from Settings or, on "Auto", from `navigator.languages`.
+
+To add a language: copy `src/i18n/en.ts` to `xx.ts`, type it `export const xx: Messages = {…}`,
+translate, then add `xx` to `LOCALES`/`LOCALE_NAMES` in `src/i18n/index.ts` and to
+`LANGUAGE_OPTIONS` in `src/store/settings.ts` (a test checks they match). Prefer gender-neutral
+phrasing: the visitor could be anyone.
 
 **State.** Four tiny stores built on `useSyncExternalStore`: `settings`, `mix` and `experience`
 persist to `localStorage` (namespaced, sanitized on load: stored data is never trusted);

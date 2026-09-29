@@ -1,5 +1,9 @@
 import { asRecord, createStore, pickBoolean, pickEnum, pickNumber } from '../lib/store';
 
+/** Kept in sync with LOCALES in src/i18n (no import: avoids a store ↔ i18n cycle). */
+export const LANGUAGE_OPTIONS = ['auto', 'en', 'es', 'pt', 'fr'] as const;
+export type LanguageSetting = (typeof LANGUAGE_OPTIONS)[number];
+
 export type MotionPreference = 'system' | 'reduced' | 'full';
 export type PerformancePreference = 'auto' | 'on' | 'off';
 
@@ -11,6 +15,7 @@ export interface SettingsState {
   performance: PerformancePreference;
   /** Let the interface fade away when you stop touching things. */
   autoHide: boolean;
+  language: LanguageSetting;
 }
 
 export const DEFAULT_SETTINGS: SettingsState = {
@@ -20,6 +25,7 @@ export const DEFAULT_SETTINGS: SettingsState = {
   particles: true,
   performance: 'auto',
   autoHide: true,
+  language: 'auto',
 };
 
 export function sanitizeSettings(stored: unknown, d: SettingsState): SettingsState {
@@ -31,6 +37,7 @@ export function sanitizeSettings(stored: unknown, d: SettingsState): SettingsSta
     particles: pickBoolean(s.particles, d.particles),
     performance: pickEnum(s.performance, ['auto', 'on', 'off'] as const, d.performance),
     autoHide: pickBoolean(s.autoHide, d.autoHide),
+    language: pickEnum(s.language, LANGUAGE_OPTIONS, d.language),
   };
 }
 

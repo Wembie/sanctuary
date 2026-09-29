@@ -14,6 +14,14 @@
   min-height: 48px;
 }
 
+/* Label above: five languages don't fit beside it. */
+.stackRow {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  padding: var(--space-2) 0;
+}
+
 .fullscreen {
   display: flex;
   align-items: center;

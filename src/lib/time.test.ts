@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getDailyPause } from './daily';
 import { hashString, pick, seededRandom } from './random';
-import { getDayPart, getGreeting, localDateKey } from './time';
+import { getDayPart, localDateKey } from './time';
 
 const at = (hour: number, day = 12) => new Date(2026, 8, day, hour, 30);
 
@@ -12,13 +12,6 @@ describe('time of day', () => {
     expect(getDayPart(at(19))).toBe('evening');
     expect(getDayPart(at(23))).toBe('night');
     expect(getDayPart(at(3))).toBe('night');
-  });
-
-  it('greets appropriately (night still says good evening)', () => {
-    expect(getGreeting(at(8))).toBe('Good morning.');
-    expect(getGreeting(at(15))).toBe('Good afternoon.');
-    expect(getGreeting(at(20))).toBe('Good evening.');
-    expect(getGreeting(at(2))).toBe('Good evening.');
   });
 
   it('keys dates by local calendar day', () => {

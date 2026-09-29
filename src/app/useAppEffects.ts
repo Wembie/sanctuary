@@ -10,12 +10,15 @@ import { sceneStore } from '../store/scene';
 import { settingsStore } from '../store/settings';
 import { applyTheme, getEnvironment } from '../themes/environments';
 import { setSoundEnabled } from './actions';
-import { ROUTES, type RoutePath } from './routes';
+import { useLocale, useT } from '../i18n';
+import { ROUTE_NAME, type RoutePath } from './routes';
 
 /** Mirrors preferences onto <html> so CSS can respond without prop drilling. */
 export function useDocumentState(route: RoutePath, entered: boolean): void {
   const reduced = useReducedMotion();
   const low = useLowPerformance();
+  const t = useT();
+  const locale = useLocale();
   const autoHide = useStore(settingsStore, (s) => s.autoHide);
   const stillness = useStore(sceneStore, (s) => s.stillness);
   const settingsOpen = useStore(sceneStore, (s) => s.settingsOpen);
@@ -33,9 +36,17 @@ export function useDocumentState(route: RoutePath, entered: boolean): void {
   }, [idle]);
 
   useEffect(() => {
-    document.title = ROUTES[route].title;
+    document.title =
+      route === '/' ? t.routes.homeTitle : t.routes.pageTitle(t.routes[ROUTE_NAME[route]]);
+  }, [route, t]);
+
+  useEffect(() => {
     if (entered && route !== '/') experienceStore.set({ lastRoute: route });
   }, [route, entered]);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 }
 
 /** The scene's colors follow the chosen environment. */

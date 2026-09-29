@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { setSoundEnabled } from '../../app/actions';
 import { useReducedMotion } from '../../hooks/usePreferences';
+import { useT } from '../../i18n';
 import { audio } from '../../services/audio/AudioManager';
 import { settingsStore } from '../../store/settings';
 import { FadeText } from '../ui/FadeText';
@@ -11,15 +12,6 @@ interface ThresholdProps {
   onEnter: () => void;
 }
 
-const FIRST_VISIT = [
-  'Take a breath.',
-  'You’re safe here.',
-  'This place is yours.',
-  'There are no goals here.',
-  'Take what you need.',
-];
-const RETURNING = ['Welcome back.', 'Take a breath.', 'You’re safe here.'];
-
 const LINE_MS = 3600;
 const DOOR_AFTER_LINES = 2;
 const ENTER_MS = 1600;
@@ -29,8 +21,9 @@ const ENTER_MS = 1600;
  * Choosing sound here is the user gesture that lets audio start at all.
  */
 export function Threshold({ firstVisit, onEnter }: ThresholdProps) {
+  const t = useT();
   const reduced = useReducedMotion();
-  const lines = firstVisit ? FIRST_VISIT : RETURNING;
+  const lines = firstVisit ? t.threshold.firstVisit : t.threshold.returning;
   const [index, setIndex] = useState(0);
   const [entering, setEntering] = useState(false);
   const doorVisible = reduced || index >= DOOR_AFTER_LINES - 1;
@@ -66,15 +59,15 @@ export function Threshold({ firstVisit, onEnter }: ThresholdProps) {
           <span className={styles.arch} aria-hidden="true">
             <span className={styles.archLight} />
           </span>
-          <span className={styles.doorLabel}>Enter Sanctuary</span>
+          <span className={styles.doorLabel}>{t.threshold.enter}</span>
         </button>
         {audio.supported && (
           <>
             <p id="door-hint" className={styles.hint}>
-              with sound · headphones recommended
+              {t.threshold.hint}
             </p>
             <button type="button" className={styles.silent} onClick={() => enter(false)}>
-              or enter in silence
+              {t.threshold.silent}
             </button>
           </>
         )}

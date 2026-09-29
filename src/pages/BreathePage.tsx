@@ -5,29 +5,25 @@ import { FadeText } from '../components/ui/FadeText';
 import { Segmented } from '../components/ui/Segmented';
 import { useReducedMotion } from '../hooks/usePreferences';
 import { useStore } from '../hooks/useStore';
+import { useT } from '../i18n';
 import { TECHNIQUES, type TechniqueId } from '../lib/breathing';
 import { experienceStore } from '../store/experience';
 import styles from './Page.module.css';
 import local from './BreathePage.module.css';
 
-const OPTIONS: { value: TechniqueId; label: string }[] = [
-  { value: 'calm', label: 'Calm' },
-  { value: 'box', label: 'Box' },
-  { value: 'deep', label: 'Deep' },
-  { value: 'custom', label: 'Custom' },
-];
+const TECHNIQUE_IDS: readonly TechniqueId[] = ['calm', 'box', 'deep', 'custom'];
 
 const SETTLE_MS = 3500;
 
 export default function BreathePage() {
+  const t = useT();
   const { technique, customPattern, showBreathTimer } = useStore(experienceStore);
   const reduced = useReducedMotion();
   const [settled, setSettled] = useState(false);
   const [paused, setPaused] = useState(false);
   const pattern = technique === 'custom' ? customPattern : TECHNIQUES[technique].pattern;
-  const description =
-    technique === 'custom' ? 'Your own rhythm.' : TECHNIQUES[technique].description;
   const running = settled && !paused;
+  const options = TECHNIQUE_IDS.map((id) => ({ value: id, label: t.breathe.techniques[id].label }));
 
   // A few seconds to arrive before the first breath.
   useEffect(() => {
@@ -47,16 +43,16 @@ export default function BreathePage() {
 
   return (
     <div className={`${styles.page} ${styles.center}`}>
-      <h1 className="sr-only">Breathe</h1>
+      <h1 className="sr-only">{t.breathe.heading}</h1>
 
       <div className={`${styles.topBar} chrome`}>
         <Segmented
-          label="Breathing technique"
-          options={OPTIONS}
+          label={t.breathe.techniqueLabel}
+          options={options}
           value={technique}
           onChange={(value) => experienceStore.set({ technique: value })}
         />
-        <p className={styles.muted}>{description}</p>
+        <p className={styles.muted}>{t.breathe.techniques[technique].description}</p>
         {technique === 'custom' && (
           <PatternEditor
             pattern={customPattern}
@@ -77,7 +73,7 @@ export default function BreathePage() {
         ) : (
           <div className={local.settling}>
             <div className={local.restingOrb} aria-hidden="true" />
-            <FadeText text="Get comfortable." className={local.settleText} />
+            <FadeText text={t.breathe.settle} className={local.settleText} />
           </div>
         )}
       </div>
@@ -89,7 +85,7 @@ export default function BreathePage() {
           aria-pressed={showBreathTimer}
           onClick={() => experienceStore.set({ showBreathTimer: !showBreathTimer })}
         >
-          {showBreathTimer ? 'Hide time' : 'Show time'}
+          {showBreathTimer ? t.breathe.hideTime : t.breathe.showTime}
         </button>
       </div>
     </div>

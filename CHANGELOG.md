@@ -14,6 +14,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
   API). Released on pause, when leaving the page or ending the session, re-acquired when the tab
   becomes visible again; silently skipped where unsupported.
 
+### Changed
+
+- Home: the Sleep hint now says what actually happens ("Let the screen fade to dark") instead
+  of "Let the room go dark", which read as if it controlled the lights. All four languages.
+
 Planned work lives in [`TODO.md`](TODO.md).
 
 ## [0.2.1] — 2026-09-29

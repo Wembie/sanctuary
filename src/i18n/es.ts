@@ -60,7 +60,7 @@ export const es: Messages = {
     needs: {
       calm: { label: 'Calma', hint: 'Respira despacio' },
       focus: { label: 'Enfoque', hint: 'Trabaja sin presión' },
-      sleep: { label: 'Dormir', hint: 'Deja que la habitación se oscurezca' },
+      sleep: { label: 'Dormir', hint: 'Deja que la pantalla se apague poco a poco' },
       disconnect: { label: 'Desconectar', hint: 'Aléjate un rato' },
     },
     stay: 'O simplemente quédate.',

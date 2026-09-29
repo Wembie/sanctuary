@@ -50,6 +50,12 @@ If it adds pressure (streaks, stats, notifications), it doesn't belong here.
 - [ ] **Lighthouse CI**: performance and accessibility budgets on every PR
 - [ ] **Dependabot** for npm and GitHub Actions
 
+## Ideas (after 1.0, optional)
+
+- [ ] **Smart lights**: dim real lights with the Sleep fade via the user's own Home Assistant
+      (URL + token entered locally). Browsers block direct Hue bridge access from HTTPS pages,
+      so this only works for people who already run Home Assistant.
+
 ## v1.0.0
 
 - [ ] Everything above polished, tested on real devices, documented; then release `1.0.0`

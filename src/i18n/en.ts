@@ -63,7 +63,7 @@ export const en = {
     needs: {
       calm: { label: 'Calm', hint: 'Breathe slowly' },
       focus: { label: 'Focus', hint: 'Work without pressure' },
-      sleep: { label: 'Sleep', hint: 'Let the room go dark' },
+      sleep: { label: 'Sleep', hint: 'Let the screen fade to dark' },
       disconnect: { label: 'Disconnect', hint: 'Be away for a while' },
     },
     stay: 'Or simply stay.',

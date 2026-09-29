@@ -113,6 +113,7 @@ export function SettingsPanel() {
       )}
 
       <p className={styles.note}>{t.settings.privacy}</p>
+      <p className={styles.version}>Sanctuary v{__APP_VERSION__}</p>
     </Modal>
   );
 }

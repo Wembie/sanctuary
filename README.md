@@ -139,10 +139,30 @@ components are verified by hand, in a browser, on real devices.
 npm test
 ```
 
-## Deployment (GitHub Pages)
+## CI/CD, deployment and releases
 
-Every push to `main` runs `.github/workflows/ci.yml`: install → lint → format check → typecheck →
-test → build → deploy. Pull requests run everything except deploy.
+One pipeline, `.github/workflows/ci.yml`:
+
+| Trigger        | Jobs                                                                           |
+| -------------- | ------------------------------------------------------------------------------ |
+| Pull request   | **verify**: version check → install → lint → format → typecheck → test → build |
+| Push to `main` | **verify** → **deploy** (GitHub Pages) → **release** (tag + GitHub Release)    |
+
+### Versioning: the `VERSION` file
+
+`VERSION` (one line, SemVer) is the single source of truth. The app reads it at build time
+(shown in Settings), CI validates it, and the release job uses it. `package.json` deliberately
+has no `version` field, so there is nothing to keep in sync.
+
+To release:
+
+1. Change `VERSION`, e.g. `0.3.0`.
+2. Add a `## [0.3.0] — YYYY-MM-DD` section to `CHANGELOG.md` (CI fails if it's missing).
+3. Merge to `main`.
+
+The pipeline then creates the `v0.3.0` tag, publishes the GitHub Release with that changelog
+section as notes, and attaches `sanctuary-v0.3.0.zip` (the built site). Nothing is tagged or
+released by hand. Check locally with `npm run version:check`.
 
 One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 
@@ -198,7 +218,8 @@ no `@property` → colors switch instead of crossfading.
    `perf: batch ember rendering`, `a11y: label duration picker`.
 4. Before opening a PR, ask of your change: _is anything here faster, louder or busier than it
    needs to be?_ If so, slow it down.
-5. Update `CHANGELOG.md` under **Unreleased**.
+5. Update `CHANGELOG.md` under **Unreleased**. Maintainers cut a release by bumping `VERSION`
+   (see [CI/CD, deployment and releases](#cicd-deployment-and-releases)).
 
 Versioning follows [SemVer](https://semver.org/). `0.x` while the experience takes shape; `1.0.0`
 when it is stable, polished and complete.

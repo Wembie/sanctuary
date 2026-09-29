@@ -35,8 +35,14 @@ Languages and music.
 - **Automatic local tracks**: files dropped into `src/assets/music/<category>/` appear in the
   Music list with no code changes; an optional sidecar JSON sets title and credit.
 
+- **Automatic releases**: the CI/CD pipeline tags and publishes a GitHub Release (notes from this
+  changelog, built site attached) whenever a new version reaches `main`.
+- The app version is shown in Settings.
+
 ### Changed
 
+- The version lives in a single `VERSION` file; `package.json` no longer carries one. CI checks
+  that `VERSION` is valid SemVer and has a matching changelog section.
 - Music files moved from `public/audio/` to `src/assets/music/` (bundled and fingerprinted).
 - Display text moved out of data modules (environments, sounds, techniques, routes) into the
   dictionaries in `src/i18n/`; data now carries only ids.

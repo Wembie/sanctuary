@@ -5,13 +5,29 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Planned for v0.3 — Immersion
+
+- Audio-reactive visualizer (blobs and waves, never an equalizer)
+- Richer environment visuals (caustics, glass droplets, abstract trees)
+
+### Planned for v0.4 — Experiences
+
+- Calm Canvas, Floating Bubbles, Grow, Zen Garden
+
+### Planned for v0.5 — Polish
+
+- Time-aware palettes, easter eggs, offline caching (PWA service worker)
+
+## [0.2.0] — 2026-09-29
+
+Languages and music.
+
 ### Added
 
 - **Internationalization**: English, Español, Português and Français. The language is detected
   from the browser (`es-CO` → Español) and can be changed in Settings; the choice persists.
   Dictionaries are typed against English, so a missing translation fails the build. `<html lang>`
   and page titles follow the language.
-
 - **Generative music**: seven original pieces (Slow Tide, Low Lantern, Clear Water, Stone Bell,
   Morning Moss, Aurora, Rain Tapes), one per category, composed live from recipes by a small
   engine: pads, bells, arpeggios, singing bowls, lo-fi keys with tape wobble, soft drums, and a
@@ -24,19 +40,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - Music files moved from `public/audio/` to `src/assets/music/` (bundled and fingerprinted).
 - Display text moved out of data modules (environments, sounds, techniques, routes) into the
   dictionaries in `src/i18n/`; data now carries only ids.
-
-### Planned for v0.2 — Immersion
-
-- Audio-reactive visualizer (blobs and waves, never an equalizer)
-- Richer environment visuals (caustics, glass droplets, abstract trees)
-
-### Planned for v0.3 — Experiences
-
-- Calm Canvas, Floating Bubbles, Grow, Zen Garden
-
-### Planned for v0.4 — Polish
-
-- Time-aware palettes, easter eggs, offline caching (PWA service worker)
 
 ## [0.1.0] — 2026-09-29
 

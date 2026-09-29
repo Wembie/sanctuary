@@ -1,7 +1,7 @@
 {
   "name": "sanctuary",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A quiet place for a noisy world. An immersive, client-side space for breathing, relaxing, focusing and slowing down.",
   "type": "module",
   "scripts": {

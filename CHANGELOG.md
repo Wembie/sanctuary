@@ -9,19 +9,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 - `CLAUDE.md`: project guide for AI-assisted development (architecture, conventions, how-tos,
   release flow, gotchas).
+- `TODO.md`: the roadmap as a checklist, ordered by version.
 
-### Planned for v0.3 — Immersion
-
-- Audio-reactive visualizer (blobs and waves, never an equalizer)
-- Richer environment visuals (caustics, glass droplets, abstract trees)
-
-### Planned for v0.4 — Experiences
-
-- Calm Canvas, Floating Bubbles, Grow, Zen Garden
-
-### Planned for v0.5 — Polish
-
-- Time-aware palettes, easter eggs, offline caching (PWA service worker)
+Planned work lives in [`TODO.md`](TODO.md).
 
 ## [0.2.1] — 2026-09-29
 

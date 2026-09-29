@@ -125,6 +125,13 @@ belongs in the nav) an item in `FloatingNavigation.tsx`. Immersive pages call `u
 **Change the author credit**: `src/app/credits.ts` (app), plus `index.html` meta, `package.json`
 `author`, README "Author".
 
+## Roadmap (`TODO.md`)
+
+`TODO.md` is the roadmap as a checklist, ordered by version. When starting work, take the next
+unchecked item(s) of the lowest version unless told otherwise. In the same PR that ships an
+item, tick it (`- [x]`) and add it to `CHANGELOG.md` under **Unreleased** (it moves into the
+version section at release). New ideas go into `TODO.md`, not the changelog.
+
 ## Versioning and releases
 
 - `VERSION` (one line, SemVer) is the **only** version. `package.json` intentionally has no

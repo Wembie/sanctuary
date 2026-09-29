@@ -33,9 +33,11 @@ src/
   components/   ambient/ (background + canvas), audio/ (SoundMixer, MusicPlayer), breathing/,
                 cursor/, experiences/ (Stillness), intro/ (Loader, Threshold), navigation/,
                 session/ (DurationPicker, ProgressRing, SessionControls), settings/, ui/
-  hooks/        useStore, useHashRoute, useIdle, useSession, useAnimationFrame, usePreferences, useScene
+  hooks/        useStore, useHashRoute, useIdle, useSession, useAnimationFrame, usePreferences, useScene,
+                useWakeLock (keep screen on while active)
   i18n/         en.ts (source, defines Messages), es.ts, pt.ts, fr.ts, index.ts (useT, detection)
-  lib/          Pure logic: breathing, timer, sleep, daily, random, time, storage, store, device
+  lib/          Pure logic: breathing, timer, sleep, daily, random, time, storage, store, device,
+                wakeLock (ScreenWakeLock, injectable for tests)
     ambient/    AmbientEngine: the canvas particle system
   pages/        One lazy chunk per route
   services/audio/

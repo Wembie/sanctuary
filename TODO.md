@@ -8,7 +8,7 @@ If it adds pressure (streaks, stats, notifications), it doesn't belong here.
 
 ## v0.3.0 — Night-ready on mobile
 
-- [ ] **Wake Lock**: keep the screen on during Breathe and Focus (release on pause/leave; graceful when unsupported)
+- [x] **Wake Lock**: keep the screen on during Breathe and Focus (release on pause/leave; graceful when unsupported)
 - [ ] **Media Session**: lock-screen title and play/pause for music; audio keeps playing in the background
 - [ ] **PWA offline**: service worker caching the app shell and assets; installable; PNG icons (192/512, maskable)
 - [ ] **Sessions survive navigation**: a running Focus/Disconnect/Sleep timer keeps going when you change pages

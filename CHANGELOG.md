@@ -10,6 +10,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - `CLAUDE.md`: project guide for AI-assisted development (architecture, conventions, how-tos,
   release flow, gotchas).
 - `TODO.md`: the roadmap as a checklist, ordered by version.
+- **Screen stays awake** while breathing or during a running Focus session (Screen Wake Lock
+  API). Released on pause, when leaving the page or ending the session, re-acquired when the tab
+  becomes visible again; silently skipped where unsupported.
 
 Planned work lives in [`TODO.md`](TODO.md).
 
